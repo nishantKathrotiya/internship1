@@ -1,0 +1,133 @@
+.sendotp-main-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sendotp-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sendotp-form-container {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.sendotp-form-container h1{
+    font-family: 'poppins';
+}
+
+.sendotp-form {
+    width: 60%;
+}
+
+.sendotp-submit {
+    width: 100%;
+}
+
+.verifyEmailForm_22 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+.paraAtVerify_22{
+    text-align: start;
+    width: 100%;
+}
+.inputAtOTP_22 {
+    background-color: #fff;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    padding: 5px !important;
+    width: 48px !important;
+    aspect-ratio: 1/1 !important;
+}
+
+.lastSectionAtVerify_22 {
+    width: 100%;
+    padding: 0 35px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+
+}
+
+.verifyEmailForm_22 p {
+    font-family: "poppins";
+    font-size: 0.8vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.VerifyOtpSubmitBtn_22 {
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px 17px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #7522e6;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.verifyEmailLastLink_22 {
+    width: 100%;
+    display: flex;
+    font-size: small;
+    justify-content: space-between;
+}
+
+.verifyEmailLastLink_22>button {
+    font-size: small;
+    cursor: pointer;
+}
+
+.verifyEmailLastLinkStyle_22 {
+    text-decoration: none;
+    color: black;
+}
+
+
+.sendotp-submit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sendotp-submit button {
+    background-color: #0C1421;
+    color: white;
+    font-family: "poppins";
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+    width: 158px;
+    height: 50px;
+    border-radius: 140px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.verifyEmailLastLink_22 {
+    font-family: "poppins";
+    font-weight: 500;
+}
+
+.verifyEmailLastLink_22 button{
+    background-color: transparent;
+    border: none;
+    color: #0C1421;
+    font-weight: 600;
+}
