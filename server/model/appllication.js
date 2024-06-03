@@ -1,77 +1,151 @@
 const mongoose = require("mongoose");
 
 const applicationSchema = new mongoose.Schema({
-    applicantName:{
-        type:String,
-        required:true,
+    fname: {
+        type: String,
+        required: true,
     },
-    mobileNo:{
-        type:Number,
-        required:true,
+    mname: {
+        type: String,
+        required: true,
     },
-    email:{
-        type:String,
-        required:true,
+    lname: {
+        type: String,
+        required: true,
     },
-    department:{
-        type:String,
-        required:true,
-        enum:["CSE","CE","IT"],
+    studentID: {
+        type: String,
+        required: true,
     },
-    graduation:{
-        type:String,
-        required:true,
-        enum:["UG","PG"]
+    mobileNumber: {
+        type: String,
+        required: true,
     },
-    attendance:{
-        type:Number,
-        require:true,
+    department: {
+        type: String,
+        required: true,
+        enum: ["CE", "CS", "IT"],
     },
-    paperTitle:{
-        type:String,
-        required:true,
+    pgUg: {
+        type: String,
+        required: true,
+        enum: ["PG", "UG"],
     },
-    conferanceName:{
-        type:String,
-        required:true,
+    institute: {
+        type: String,
+        required: true,
+        enum: ["DEPSTAR", "CSPIT"],
+        default: "DEPSTAR",
     },
-    consferanceWeb:{
-        type:String,
-        required:true
+    attendance: {
+        type: Number,
+        required: true,
     },
-    publisherDetails:{
-        type:String,
-        required:true,
+    paperTitle: {
+        type: String,
+        required: true,
     },
-    registrationFees:{
-        type:Number,
-        required:true,
+    publisherDetail: {
+        type: String,
+        required: true,
     },
-    indexing:{
-        type:String,
-        require:true,
-        enum:["scoups","web of science"]
+    conferenceName: {
+        type: String,
+        required: true,
     },
-    areYouFirstAuthor:{
-        type:Boolean,
-        required:true,
+    conferenceWebsite: {
+        type: String,
+        required: true,
     },
-    firstAuthorName:{
-        type:String,
+    regFees: {
+        type: Number,
+        required: true,
     },
-    firstAuthorId:{
-        type:String,
+    indexing: {
+        type: String,
+        required: true,
+        enum: ["Scopus", "Web Science"],
     },
-    facultyCoAuthor:[{
-        type:String,
-        required:true,
-    }],
-    facultyDepartment:{
-        type:String,
-        required:true,
+    firstAuthor: {
+        type: String,
+        required: true,
+        enum: ["Yes", "No"],
     },
-    facultyInstitute:{
-        type:String,
-        required:true,
+    authorFullName: {
+        type: String,
+        required: function() {
+            return this.firstAuthor === "No";
+        }
     },
-})
+    authorRollNo: {
+        type: String,
+        required: function() {
+            return this.firstAuthor === "No";
+        }
+    },
+    facultyCoAuthorName: {
+        type: String,
+        required: true,
+    },
+    facultyDepartment: {
+        type: String,
+        required: true,
+        enum: ["CE", "CS", "IT"],
+    },
+    facultyInstitute: {
+        type: String,
+        required: true,
+        enum: ["DEPSTAR", "CSPIT"],
+        default: "DEPSTAR",
+    },
+    confirmation: {
+        type: Boolean,
+        required: true,
+    },
+    conferenceAcceptance: {
+        type: Buffer, 
+        required: true,
+    },
+    regFeesProof: {
+        type: Buffer, 
+        required: true,
+    },
+    indexingProof: {
+        type: Buffer, 
+        required: true,
+    },
+});
+
+module.exports = mongoose.model("Application", applicationSchema);
+
+
+// function test(){
+//     const formFields = [
+//         "fname",
+//         "mname",
+//         "lname",
+//         "studentID",
+//         "mobileNumber",
+//         "department",
+//         "pgUg",
+//         "institute",
+//         "attendance",
+//         "paperTitle",
+//         "publisherDetail",
+//         "conferenceName",
+//         "conferenceWebsite",
+//         "regFees",
+//         "indexing",
+//         "firstAuthor",
+//         "authorFullName",
+//         "authorRollNo",
+//         "facultyCoAuthorName",
+//         "facultyDepartment",
+//         "facultyInstitute",
+//         "confirmation",
+//         "conferenceAcceptance",
+//         "regFeesProof",
+//         "indexingProof",
+//       ];
+      
+// }

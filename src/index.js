@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
+import './app.css';
 
 import { Provider } from "react-redux";
 import rootReducer from "./reducer/reducer";
@@ -22,7 +23,7 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <App />
-        <ToastContainer />
+        <ToastContainer className="custom" />
       </BrowserRouter>
     </React.StrictMode>
   </Provider>

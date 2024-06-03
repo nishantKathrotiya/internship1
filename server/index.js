@@ -1,13 +1,13 @@
-
 const express = require("express");
 const app = express();
 
-const userRoutes = require("./routes/User");
 const dbConnect = require("./config/connect");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const {isLoggedin,isAdmin}  =require("./middleware/AuthMiddleware")
+
+const userRoutes = require("./routes/User");
+const studentRoutes = require("./routes/Student")
 
 dotenv.config();
 const PORT = process.env.PORT ;
@@ -28,6 +28,9 @@ app.use(
 
 //routes
 app.use("/auth", userRoutes);
+app.use("/student",studentRoutes);
+
+
 
 app.get("/", (req, res) => {
 	
@@ -38,10 +41,7 @@ app.get("/", (req, res) => {
 	
 });
 
-app.get('/test' ,isLoggedin, isAdmin ,(req,res)=>{
-    console.log(req.user);
-    res.send(req.user);
-})
+
 
 
 app.listen(PORT, () => {
