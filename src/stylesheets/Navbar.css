@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  height: 58px;
+  gap: 4.25rem;
+}
+.bar ul {
+  display: flex;
+  height: 3.625rem;
+  padding: 1.5rem 3.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 3.625rem;
+}
+.bar li {
+  cursor: pointer;
+}
+.logos img {
+  gap: 0.85rem;
+}
+.login-signup {
+  display: flex;
+  gap: 1.24rem;
+}
+.login-signup button {
+  cursor: pointer;
+  display: flex;
+  width: 10.75rem;
+  height: 3.625rem;
+  padding: 1.5625rem 3.375rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  border-radius: 2.4375rem;
+  background: #fff;
+}
