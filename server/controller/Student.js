@@ -25,11 +25,73 @@ const newApplication = async (req,res)=>{
         facultyCoAuthorName,
         facultyDepartment,
         facultyInstitute,
-        confirmation,
         conferenceAcceptance,
         regFeesProof,
         indexingProof,
     } = req.body.formData;
+
+
+    if(
+         fname==""
+        || mname==""
+        || lname==""
+        || studentID==""
+        || mobileNumber==""
+        || department==""
+        || pgUg==""
+        || institute==""
+        || attendance==""
+        || paperTitle==""
+        || publisherDetail==""
+        || conferenceName==""
+        || conferenceWebsite==""
+        || regFees==""
+        || indexing==""
+        || facultyCoAuthorName==""
+        || facultyDepartment==""
+        || facultyInstitute==""
+        || !conferenceAcceptance
+        || !regFeesProof
+        || !indexingProof
+        || ((firstAuthor=='No') && (authorFullName=="" || authorRollNo==""))
+    ){
+
+        // ( || firstAuthor==""
+        // || authorFullName==""
+        // || authorRollNo=="")
+        console.log(firstAuthor,
+            (firstAuthor == "No" &&
+              !(authorFullName == "" || authorRollNo == ""))
+        );
+        console.log( fname,
+            mname,
+            lname,
+            studentID,
+            mobileNumber,
+            department,
+            pgUg,
+            institute,
+            attendance,
+            paperTitle,
+            publisherDetail,
+            conferenceName,
+            conferenceWebsite,
+            regFees,
+            indexing,
+            firstAuthor,
+            authorFullName,
+            authorRollNo,
+            facultyCoAuthorName,
+            facultyDepartment,
+            facultyInstitute,
+            conferenceAcceptance,
+            regFeesProof,
+            indexingProof)
+        return res.json({
+            success:false,
+            message:"All Field Required"
+        });
+    }
       
     console.log( fname,
         mname,
@@ -52,7 +114,6 @@ const newApplication = async (req,res)=>{
         facultyCoAuthorName,
         facultyDepartment,
         facultyInstitute,
-        confirmation,
         conferenceAcceptance,
         regFeesProof,
         indexingProof)
@@ -62,7 +123,7 @@ const newApplication = async (req,res)=>{
 
         res.json({
             success:true,
-            msg:"Application Submitted",
+            message:"Application Submitted",
 
         })
     }catch(err){

@@ -12,11 +12,11 @@ export async function newApplication(formData,setLoading,navigate) {
             throw new Error(response.data.message)
           }
           toast.success("Application Registred")
-          navigate("/student")
+          // navigate("/student")
       }
        catch (error) {
         console.log("Application Register API ERROR............", error)
-        toast.error("Somethin Went Wrong Try after short time")
+        toast.error(error.message)
       }
      setLoading(false)
     toast.dismiss(toastId)

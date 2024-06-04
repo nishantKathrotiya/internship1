@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { newApplication } from "../services/operation/student";
 import "../stylesheets/Form.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ const Form = () => {
     lname: "",
     studentID: "",
     mobileNumber: "",
-    department: "",
-    pgUg: "",
+    department: "IT",
+    pgUg: "PG",
     institute: "DEPSTAR",
     attendance: "",
     paperTitle: "",
@@ -21,12 +22,12 @@ const Form = () => {
     conferenceName: "",
     conferenceWebsite: "",
     regFees: "",
-    indexing: "",
-    firstAuthor: "",
+    indexing: "Scopus",
+    firstAuthor: "Yes",
     authorFullName: "",
     authorRollNo: "",
     facultyCoAuthorName: "",
-    facultyDepartment: "",
+    facultyDepartment: "IT",
     facultyInstitute: "DEPSTAR",
     confirmation: false,
     conferenceAcceptance: null,
@@ -51,8 +52,68 @@ const Form = () => {
     handleChange(e);
   };
 
+  const validation =()=>{
+
+    const {
+      fname,
+      mname,
+      lname,
+      studentID,
+      mobileNumber,
+      department,
+      pgUg,
+      institute,
+      attendance,
+      paperTitle,
+      publisherDetail,
+      conferenceName,
+      conferenceWebsite,
+      regFees,
+      indexing,
+      firstAuthor,
+      authorFullName,
+      authorRollNo,
+      facultyCoAuthorName,
+      facultyDepartment,
+      facultyInstitute,
+      conferenceAcceptance,
+      confirmation,
+      regFeesProof,
+      indexingProof,
+  } = formData;
+
+    return  (
+    fname==""
+    || mname==""
+    || lname==""
+    || studentID==""
+    || mobileNumber==""
+    || department==""
+    || pgUg==""
+    || institute==""
+    || attendance==""
+    || paperTitle==""
+    || publisherDetail==""
+    || conferenceName==""
+    || conferenceWebsite==""
+    || regFees==""
+    || indexing==""
+    || facultyCoAuthorName==""
+    || facultyDepartment==""
+    || facultyInstitute==""
+    || !conferenceAcceptance
+    || !regFeesProof
+    || !indexingProof
+    || ((firstAuthor=='No') && (authorFullName=="" || authorRollNo==""))
+    || !confirmation
+    )
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(validation()){
+      return toast.error("Fill All the Fields");
+    }
     // Process the form data here
     console.log(formData);
     newApplication(formData,setLoading,navigate);
