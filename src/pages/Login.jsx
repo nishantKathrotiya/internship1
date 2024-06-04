@@ -1,4 +1,5 @@
 import React , {useState} from 'react'
+import Navbar from './Navbar'
 import signupImg from '../assets/login.png'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
@@ -28,6 +29,7 @@ const Login = () => {
 
   return (
     <div>
+      <Navbar />
       <div className='signup-main-container'>
         <div className='signup-image'>
           <img src={signupImg} alt='signup-image' />
@@ -61,7 +63,7 @@ const Login = () => {
               </div>
             </div>
 
-            <div className='signup-submit'>
+            <div className='login-submit'>
               <button onClick={handleOnSubmit}>Log In</button>
               <h4>Don't Have an account ? <span><Link id='red' to="/signup">Signup</Link></span></h4>
             </div>

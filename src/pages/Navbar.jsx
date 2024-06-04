@@ -1,16 +1,26 @@
 import "../stylesheets/Navbar.css";
 import charusatlogo from "../assets/Charusat-Logo.png";
 import depstarlogo from "../assets/Depstar-Logo.png";
-const Navbar = () => {
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../services/operation/authApi";
+const Navbar = ({bgwhite=false}) => {
+  console.log(bgwhite)
+  const { token } = useSelector((state) => state.profile);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <>
-      <section className="navbar">
-        <div className="logos">
-          <img src={charusatlogo} alt="" />
-          <img src={depstarlogo} alt="" />
+      <section className={bgwhite?('navbar bg-white') : ('navbar')}>
+       <Link to="/">
+       <div className="logos">
+          <img src={charusatlogo} alt=""  />
+          <img src={depstarlogo} alt="" id="charusat" />
         </div>
+       </Link>
         <div className="bar">
-          <ul>
+          {/* <ul>
             <li>
               <a>Untitle 1</a>
             </li>
@@ -23,11 +33,23 @@ const Navbar = () => {
             <li>
               <a>Untitle 4</a>
             </li>
-          </ul>
+          </ul> */}
         </div>
         <div className="login-signup">
-        <button className="signup">Sign Up</button>
-        <button className="login">Log In</button>
+          {
+            !token ? (
+              <>
+                <Link to="/signup" className="link"><div className="signup">Sign Up</div></Link>
+                <Link to="/login" className="link"><div className="signup">Log In</div></Link>
+              </>
+            ) : (
+
+              <>
+                <Link to="/student" className="link"><div className="signup">Dashboard</div></Link>
+                <div className="signup" onClick={()=>dispatch(logout(navigate))}>Log Out</div>
+              </>
+            )
+          }
         </div>
       </section>
     </>

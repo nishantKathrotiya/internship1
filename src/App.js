@@ -8,62 +8,30 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
 import Form from "./pages/Form.jsx";
 import Home from "./pages/Home.jsx";
-import Navbar from "./pages/Navbar.jsx";
+import Student from "./pages/Student.jsx";
+import Admin from "./pages/Admin.jsx";
 
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
-        <Route
-          path="/"
-          element={
-            <OpenRoute>
-              {" "}
-              <Home />{" "}
-            </OpenRoute>
-          }
-        ></Route>
-        <Route
-          path="/login"
-          element={
-            <OpenRoute>
-              {" "}
-              <Login />{" "}
-            </OpenRoute>
-          }
-        ></Route>
-        <Route
-          path="/signup"
-          element={
-            <OpenRoute>
-              {" "}
-              <Signup />{" "}
-            </OpenRoute>
-          }
-        ></Route>
-        <Route
-          path="/verify-email"
-          element={
-            <OpenRoute>
-              {" "}
-              <SendOtp />{" "}
-            </OpenRoute>
-          }
-        ></Route>
-        <Route
-          path="/student"
-          element={<PrivateRoute>Hey Student</PrivateRoute>}
-        />
-        <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <h1>Hey Admin</h1>
-            </AdminRoute>
-          }
-        />
-        <Route path="/student/application" element={<Form />} />
+
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={ <OpenRoute><Login /></OpenRoute>} />
+        <Route path="/signup" element={ <OpenRoute><Signup /></OpenRoute>} />
+        <Route path="/verify-email" element={ <OpenRoute><SendOtp /></OpenRoute>} />
+
+      
+        <Route path="/student" element={<PrivateRoute><Student /></PrivateRoute>}>
+          <Route path="/student" element={<Home />}/>
+          <Route path="/student/application" element={<Form />}/>
+        </Route>
+
+        <Route path="/admin" element={<AdminRoute> <Admin /> </AdminRoute>}>
+          <Route path="/admin" element={<Home />}/>
+        </Route>
+
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
     </>

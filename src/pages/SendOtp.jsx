@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
 import optImg from '../assets/otp.png'
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -37,7 +38,7 @@ const SendOtp = () => {
 
     return (
         <div>
-
+            <Navbar />
             {
                 loading ? (<>Loading</>) : (
                     <div className='sendotp-main-container'>

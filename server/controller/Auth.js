@@ -159,7 +159,7 @@ const sendOTP = async (req, res) => {
 
     let res2 = await mailSender(
       req.body.sid.toLowerCase()+'@charusat.edu.in',
-      "Verification Code for CrickDelight",
+      "Verification Code for Charusat Helpdesk",
       otpTemplate(genratedOtp)
     );
 

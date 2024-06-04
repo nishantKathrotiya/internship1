@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Navbar from './Navbar'
 import signupImg from '../assets/signup.png'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -53,6 +54,7 @@ const Signup = () => {
 
     return (
         <div className='signup-main-container'>
+            <Navbar />
             {
                 loading ? (<>Loading</>) : (
                     <>
