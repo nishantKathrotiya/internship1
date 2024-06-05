@@ -1,6 +1,8 @@
 
+
+
 exports.isValidForm = async (req, res, next) => {
-  
+  console.log(req.files);
   if(Object.keys(req.body).length === 0){
     res.json({
       success:false,
@@ -31,11 +33,8 @@ exports.isValidForm = async (req, res, next) => {
             facultyCoAuthorName,
             facultyDepartment,
             facultyInstitute,
-            
         } = req.body;
         
-       
-    
         if(
              fname==""
             || mname==""
@@ -58,6 +57,7 @@ exports.isValidForm = async (req, res, next) => {
             || ((firstAuthor=='No') && (authorFullName=="" || authorRollNo==""))
         ){
 
+        
             return res.json({
                 success:false,
                 message:"All Field Required"

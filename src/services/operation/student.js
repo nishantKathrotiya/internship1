@@ -9,8 +9,6 @@ export async function newApplication(formData,setLoading,navigate) {
     formDataToSend.append(data , formData[data]);
   });
 
-
-
       const toastId = toast.loading("Loading...");
       setLoading(true)
       try {
@@ -23,7 +21,7 @@ export async function newApplication(formData,setLoading,navigate) {
             throw new Error(response.data.message)
           }
           toast.success("Application Registred")
-          // navigate("/student")
+          navigate("/student")
       }
        catch (error) {
         console.log("Application Register API ERROR............", error)
