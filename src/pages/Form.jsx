@@ -76,8 +76,8 @@ const Form = () => {
       facultyCoAuthorName,
       facultyDepartment,
       facultyInstitute,
-      conferenceAcceptance,
       confirmation,
+      conferenceAcceptance,
       regFeesProof,
       indexingProof,
   } = formData;
