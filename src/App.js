@@ -10,7 +10,7 @@ import Form from "./pages/Form.jsx";
 import Home from "./pages/Home.jsx";
 import Student from "./pages/Student.jsx";
 import Admin from "./pages/Admin.jsx";
-import { StudentDashboard } from "./pages/StudentDashboard.jsx";
+import StudentDashboard from './pages/StudentDashboard.jsx'
 
 function App() {
   return (
@@ -25,9 +25,8 @@ function App() {
 
       
         <Route path="/student" element={<PrivateRoute><Student /></PrivateRoute>}>
-          <Route path="/student" element={<Home />}/>
+          <Route path="/student" element={<StudentDashboard />}/>
           <Route path="/student/application" element={<Form />}/>
-          <Route path="/student/dashboard" element={<StudentDashboard />}/>
         </Route>
 
         <Route path="/admin" element={<AdminRoute> <Admin /> </AdminRoute>}>

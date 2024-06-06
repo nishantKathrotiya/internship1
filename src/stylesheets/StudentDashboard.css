@@ -19,7 +19,7 @@
   justify-content: center;
   margin-top: 48px;
 }
-.navbar ul {
+.navbar-dashboard ul {
   display: flex;
   gap: 3rem;
   align-items: center;
