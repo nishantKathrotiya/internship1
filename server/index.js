@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
 
-const dbConnect = require("./config/connect");
-const cookieParser = require("cookie-parser");
+const path = require('path');
 const cors = require("cors");
+const multer = require('multer');
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+const dbConnect = require("./config/connect");
 
 const userRoutes = require("./routes/User");
 const studentRoutes = require("./routes/Student")

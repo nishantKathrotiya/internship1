@@ -98,20 +98,16 @@ const applicationSchema = new mongoose.Schema({
         enum: ["DEPSTAR", "CSPIT"],
         default: "DEPSTAR",
     },
-    confirmation: {
-        type: Boolean,
-        required: true,
-    },
     conferenceAcceptance: {
-        type: Buffer, 
+        type: Object, 
         required: true,
     },
     regFeesProof: {
-        type: Buffer, 
+        type: Object, 
         required: true,
     },
     indexingProof: {
-        type: Buffer, 
+        type: Object, 
         required: true,
     },
 });
@@ -119,33 +115,3 @@ const applicationSchema = new mongoose.Schema({
 module.exports = mongoose.model("Application", applicationSchema);
 
 
-// function test(){
-//     const formFields = [
-//         "fname",
-//         "mname",
-//         "lname",
-//         "studentID",
-//         "mobileNumber",
-//         "department",
-//         "pgUg",
-//         "institute",
-//         "attendance",
-//         "paperTitle",
-//         "publisherDetail",
-//         "conferenceName",
-//         "conferenceWebsite",
-//         "regFees",
-//         "indexing",
-//         "firstAuthor",
-//         "authorFullName",
-//         "authorRollNo",
-//         "facultyCoAuthorName",
-//         "facultyDepartment",
-//         "facultyInstitute",
-//         "confirmation",
-//         "conferenceAcceptance",
-//         "regFeesProof",
-//         "indexingProof",
-//       ];
-      
-// }

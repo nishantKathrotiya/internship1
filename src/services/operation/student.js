@@ -3,16 +3,25 @@ import { apiConnector } from "../connector";
 
 
 export async function newApplication(formData,setLoading,navigate) {
-    
+
+  const formDataToSend = new FormData();
+  Object.keys(formData).forEach(data => {
+    formDataToSend.append(data , formData[data]);
+  });
+
       const toastId = toast.loading("Loading...");
       setLoading(true)
       try {
-        const response = await apiConnector("POST", 'http://localhost:4000/student/application', {formData})
+        const response = await apiConnector("POST", 'http://localhost:4000/student/application', formDataToSend , {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
         if(!response.data.success) {
             throw new Error(response.data.message)
           }
           toast.success("Application Registred")
-          // navigate("/student")
+          navigate("/student")
       }
        catch (error) {
         console.log("Application Register API ERROR............", error)
