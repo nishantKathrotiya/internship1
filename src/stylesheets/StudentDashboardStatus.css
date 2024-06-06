@@ -7,41 +7,34 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-.title {
+.StudentDashboardStatus-main-container {
+  display: flex;
+  justify-content: center;
+  gap: 11.44rem;
+  margin-top: 1.5rem;
   color: #000;
-  font-family: Poppins;
-  font-size: 1.375rem;
+  font-family: Inter;
+  font-size: 1.15rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  display: flex;
-  justify-content: center;
-  margin-top: 48px;
 }
-.navbar-dashboard-main-container {
-  color: #494949;
-  font-family: Poppins;
-  font-size: 1.125rem;
+.StudentDashboardStatus-pending-status {
+  padding: 0.19rem 2rem;
+  color: white;
+  border-radius: 0.75rem;
+  background: #20a64e;
+}
+.StudentDashboardStatus-action {
+  display: flex;
+  gap: 1.3rem;
+  color: #000;
+  font-family: Inter;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  display: flex;
-  align-items: center;
-  border-radius: 0.9375rem;
-  background: #dfdfdf;
-  height: 3.125rem;
-  margin-top: 3rem;
 }
-.papertitle {
-  margin-left: 11.44rem;
-}
-.date {
-  margin-left: 11rem;
-}
-.status {
-  margin-left: 16rem;
-}
-.action {
-  margin-left: 19rem;
+.StudentDashboardStatus-action div {
+  cursor: pointer;
 }
