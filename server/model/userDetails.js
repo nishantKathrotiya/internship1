@@ -15,6 +15,10 @@ const userLoginSchema = mongoose.Schema({
         enum: ['student', 'admin'],
         default: 'student'
     },
+    applications:[{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Applications',
+    }],
     joinedAt: {
         type: Date,
         default: Date.now

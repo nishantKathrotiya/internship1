@@ -1,18 +1,12 @@
 import "../stylesheets/StudentDashboardStatus.css";
 
-const StudentDashboardStatus = () => {
+const StudentDashboardStatus = ({ data }) => {
   return (
-    <div>
-      <div className="StudentDashboardStatus-main-container">
-        <div className="StudentDashboardStatus-paper-title">01</div>
-        <div className="StudentDashboardStatus-date">5-june-24</div>
-        <div className="StudentDashboardStatus-pending-status">Pending</div>
-        <div className="StudentDashboardStatus-action">
-          <div className="view">View</div>
-          <div className="edit"> Edit</div>
-          <div className="download"> Download</div>
-        </div>
-      </div>
+    <div className="navbar-dashboard-main-container-data">
+      <div className="papertitle">{data.paperTitle}</div>
+      <div className="date">{data.createdAt.split('T')[0]}</div>
+      <div className="status">Status</div>
+      <div className="action">Action</div>
     </div>
   );
 };

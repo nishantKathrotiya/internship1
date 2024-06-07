@@ -28,11 +28,31 @@
   line-height: normal;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   border-radius: 0.9375rem;
   background: #dfdfdf;
   height: 3.125rem;
   margin-top: 3rem;
 }
+
+.navbar-dashboard-main-container-data{
+  color: #494949;
+  font-family: Poppins;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+  background: #fff;
+  height: 2rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  border-bottom:1px solid #dadada ;
+}
+
+
 .papertitle {
   margin-left: 11.44rem;
 }

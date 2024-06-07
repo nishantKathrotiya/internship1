@@ -520,6 +520,7 @@ const Form = () => {
               <input
                 type="checkbox"
                 name="confirmation"
+                id="confirmation"
                 checked={formData.confirmation}
                 onChange={handleChange}
               />

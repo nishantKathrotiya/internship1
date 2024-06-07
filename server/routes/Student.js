@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 
 const  { isLoggedin , isStudent } = require("../middleware/AuthMiddleware");
-const {newApplication} = require("../controller/Student");
+const {newApplication  , dashboard} = require("../controller/Student");
 const {isValidForm} = require("../middleware/validation")
 
 const {upload} = require("../config/multerConfig");
@@ -13,5 +13,6 @@ router.post("/application",isLoggedin , isStudent, upload.fields([
     { name: 'indexingProof', maxCount: 1 }
 ]),isValidForm ,newApplication);
 
+router.get("/dashboard" ,isLoggedin , isStudent , dashboard );
 
 module.exports = router;

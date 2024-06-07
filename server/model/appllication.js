@@ -17,6 +17,10 @@ const applicationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    studentDBID:{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Users',
+    },
     mobileNumber: {
         type: String,
         required: true,
@@ -99,17 +103,21 @@ const applicationSchema = new mongoose.Schema({
         default: "DEPSTAR",
     },
     conferenceAcceptance: {
-        type: Object, 
+        type: String, 
         required: true,
     },
     regFeesProof: {
-        type: Object, 
+        type: String, 
         required: true,
     },
     indexingProof: {
-        type: Object, 
+        type: String, 
         required: true,
     },
+    createdAt:{
+        type:Date,
+        default:Date.now,
+    }
 });
 
 module.exports = mongoose.model("Application", applicationSchema);
