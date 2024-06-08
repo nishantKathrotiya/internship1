@@ -18,7 +18,6 @@ const StudentDashboard = () => {
         loading ? (<h1>Loading...</h1>) : (
           <>
           <div className="card-img">
-            <Bg />
             <h1>Hell</h1>
           </div>
             <div className="title">Recent Application</div>
