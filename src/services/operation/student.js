@@ -53,7 +53,7 @@ export async function dashboardDetails(setUserData , setLoading){
       throw new Error(response.data.message);
     }
     setUserData(response.data.applications)
-    toast.success("Application Registred");
+    toast.success("Data Found");
 
   } catch (error) {
 

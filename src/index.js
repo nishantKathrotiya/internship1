@@ -8,7 +8,7 @@ import './app.css';
 import { Provider } from "react-redux";
 import rootReducer from "./reducer/reducer";
 import { configureStore } from "@reduxjs/toolkit";
-import { ToastContainer } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,7 +23,8 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <App />
-        <ToastContainer className="custom" />
+        <ToastContainer 
+          transition={Slide} />
       </BrowserRouter>
     </React.StrictMode>
   </Provider>

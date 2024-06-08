@@ -1,43 +1,76 @@
 import React, { useEffect, useState } from "react";
+import { CiFilter } from "react-icons/ci";
+import Dataview from "./Dataview";
+import { Link } from "react-router-dom";
 import "../stylesheets/StudentDashboard.css";
-import StudentDashboardStatus from "./StudentDashboardStatus";
+
 import { dashboardDetails } from "../services/operation/student";
+
 const StudentDashboard = () => {
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  //Getting details as soon as page is loded
+  // Getting details as soon as page is loded
   useEffect(() => {
-    dashboardDetails(setUserData , setLoading);
+    dashboardDetails(setUserData, setLoading);
   }, []);
 
   return (
-    <div>
+    <div className="studentDashboard">
       {
         loading ? (<h1>Loading...</h1>) : (
           <>
-          <div className="card-img">
-            <Bg />
-            <h1>Hell</h1>
-          </div>
-            <div className="title">Recent Application</div>
-            <div className="navbar-dashboard-main-container">
-              <div className="papertitle">Paper Title</div>
-              <div className="date">Date</div>
-              <div className="status">Status</div>
-              <div className="action">Action</div>
-            </div>
-           {
-             userData === null ? (<>No data Found</>) : (
-              <>
-                {
-                  userData.map((data , index)=>(
-                    <StudentDashboardStatus key={index} data={data} />
-                  ))
-                }
-              </>)
-           }
+
+            {
+              userData == null ? (<h1>Data Not Found</h1>) : (
+
+                <>
+                  <div className="tiles-container">
+                    <h1>Hello Cards Come here</h1>
+                    <Link to="/student/application">Click TO apply</Link>
+                  </div>
+
+                  <div className="dataTable-container">
+                    <div className="header-row">
+                      Applications
+                      <input type="text" placeholder="search" id="searchInput" />
+                    </div>
+                    <div className="data-table-inner">
+
+                      <div className="header-title-row">
+                        <div className="colHeader DataNumber">Number</div>
+                        <div className="colHeader">Paper Title <CiFilter className="icon" /></div>
+                        <div className="colHeader">Date <CiFilter className="icon" /></div>
+                        <div className="colHeader">Status<CiFilter className="icon" /></div>
+                        <div className="colHeader">Action </div>
+                      </div>
+
+                      {
+                        userData.map((data,index) => (
+                        <>
+                            <div className="row-content">
+                            <Dataview key={data._id} data={data} index={index}/>
+                          </div>
+                          <div className="row-content">
+                            <Dataview key={data._id} data={data} index={index}/>
+                          </div>
+                          <div className="row-content">
+                            <Dataview key={data._id} data={data} index={index}/>
+                          </div>
+                          <div className="row-content">
+                            <Dataview key={data._id} data={data} index={index}/>
+                          </div>
+                        </>
+                        ))
+                      }
+
+                    </div>
+                  </div>
+                </>
+              )
+            }
+
           </>
         )
       }
