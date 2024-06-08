@@ -11,10 +11,10 @@ import Home from "./pages/Home.jsx";
 import Student from "./pages/Student.jsx";
 import Admin from "./pages/Admin.jsx";
 import StudentDashboard from './pages/StudentDashboard.jsx'
-
+import Download from "./pages/Download.jsx";
 function App() {
   return (
-    <>
+    <>  
       {/* <Navbar /> */}
       <Routes>
 
@@ -22,7 +22,8 @@ function App() {
         <Route path="/login" element={ <OpenRoute><Login /></OpenRoute>} />
         <Route path="/signup" element={ <OpenRoute><Signup /></OpenRoute>} />
         <Route path="/verify-email" element={ <OpenRoute><SendOtp /></OpenRoute>} />
-
+        <Route path="/download" element={ <OpenRoute><Download /></OpenRoute>} />
+        
       
         <Route path="/student" element={<PrivateRoute><Student /></PrivateRoute>}>
           <Route path="/student" element={<StudentDashboard />}/>
