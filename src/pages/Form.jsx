@@ -538,6 +538,7 @@ const Form = () => {
                 </label>
                 <input
                   type="file"
+                  accept=".pdf"
                   id="conferenceAcceptance"
                   name="conferenceAcceptance"
                   onChange={handleChange}
@@ -547,6 +548,7 @@ const Form = () => {
                 <label htmlFor="regFeesProof">2. Proof of Registration Fees</label>
                 <input
                   type="file"
+                   accept=".pdf"
                   id="regFeesProof"
                   name="regFeesProof"
                   onChange={handleChange}
@@ -558,6 +560,7 @@ const Form = () => {
                 </label>
                 <input
                   type="file"
+                   accept=".pdf"
                   id="indexingProof"
                   name="indexingProof"
                   onChange={handleChange}

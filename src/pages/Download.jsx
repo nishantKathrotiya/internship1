@@ -18,7 +18,7 @@ const Download = () => {
         const a = document.createElement("a");
         a.style.display = "none";
         a.href = url;
-        a.download = "22DIT017.pdf";
+        a.download = "22DIT017.jpeg";
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);

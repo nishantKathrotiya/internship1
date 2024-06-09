@@ -45,7 +45,7 @@ app.listen(PORT, () => {
 app.use(cors());
 
 app.get("/download-pdf", (req, res) => {
-  const filePath = path.join(__dirname, "./Files/22DIT017.pdf");
+  const filePath = path.join(__dirname, "./Files/665dbc9f8f0ed5d1b41c9134/796546874351-conferenceAcceptance.jpeg");
   res.sendFile(filePath, (err) => {
     if (err) {
       console.error("Error sending file:", err);
