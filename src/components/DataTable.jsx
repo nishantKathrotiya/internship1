@@ -25,16 +25,16 @@ const DataTable = ({ userData }) => {
                     userData.map((data, index) => (
                         <>
                             <div className="row-content">
-                                <Dataview key={data._id} data={data} index={index} />
+                                <Dataview key={data._id} data={data} index={index} status={'approved'}/>
                             </div>
                             <div className="row-content">
-                                <Dataview key={data._id} data={data} index={index} />
+                                <Dataview key={data._id} data={data} index={index} status={'pending'}/>
                             </div>
                             <div className="row-content">
-                                <Dataview key={data._id} data={data} index={index} />
+                                <Dataview key={data._id} data={data} index={index} status={'rejected'} />
                             </div>
                             <div className="row-content">
-                                <Dataview key={data._id} data={data} index={index} />
+                                <Dataview key={data._id} data={data} index={index} status={'returned'} />
                             </div>
                         </>
                     ))

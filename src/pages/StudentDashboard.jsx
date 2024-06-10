@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DataTable from "../components/DataTable";
 import "../stylesheets/StudentDashboard.css";
+import MeteorDemo from "../components/Meteors";
 
 import { dashboardDetails } from "../services/operation/student";
+import GridPatternDemo from "../components/GridCard";
 
 const StudentDashboard = () => {
 
@@ -25,10 +27,20 @@ const StudentDashboard = () => {
               userData == null ? (<h1>Data Not Found</h1>) : (
 
                 <>
-                  <div className="tiles-container">
-                    <h1>Hello Cards Come here</h1>
-                    <Link to="/student/application">Click TO apply</Link>
+                  <div className="outerContainer-cards">
+                    <div className="tiles-container">
+                      <MeteorDemo />
+                      <GridPatternDemo title={"Your Application"} count={25}/>
+                      <GridPatternDemo  title={"Approved Application"} count={10}/>
+                      <GridPatternDemo title={"Rejected Application"} count={12} />
+                      <GridPatternDemo title={"Returned Application"} count={3}/>
+                    </div>
+                    <div className="newApplication-conatainer">
+                    <Link to="/student/application" className="newApplicationBTN">New Application</Link>
+                    </div>
                   </div>
+
+
 
                   <div className="dataTable-container">
                     <DataTable userData={userData} />

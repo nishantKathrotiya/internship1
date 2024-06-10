@@ -20,12 +20,12 @@ const store = configureStore({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
+    <>
       <BrowserRouter>
         <App />
         <ToastContainer 
           transition={Slide} />
       </BrowserRouter>
-    </React.StrictMode>
+    </>
   </Provider>
 );
