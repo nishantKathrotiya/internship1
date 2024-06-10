@@ -15,9 +15,10 @@ body {
 .studentDashboard {
   background-color: #eff3f8 !important;
   width: 100vw;
+  min-height: 100vh;
   flex-direction: column;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   overflow: hidden;
 }

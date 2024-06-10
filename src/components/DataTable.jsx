@@ -3,13 +3,24 @@ import React, { useEffect, useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import Filter from './Filter';
 
-
 const DataTable = ({ userData }) => {
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredData, setFilteredData] = useState(userData);
+
+    useEffect(() => {
+        const filtered = userData.filter(data => data.paperTitle.toLowerCase().includes(searchQuery.toLowerCase()));
+        setFilteredData(filtered);
+    }, [searchQuery, userData]);
+
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
     return (
         <>
             <div className="header-row">
                 Applications
-                <input type="text" placeholder="search" id="searchInput" />
+                <input type="text" placeholder="search" id="searchInput" value={searchQuery} onChange={handleSearchChange} />
             </div>
             <div className="data-table-inner">
 
@@ -22,21 +33,15 @@ const DataTable = ({ userData }) => {
                 </div>
 
                 {
-                    userData.map((data, index) => (
+                    filteredData.map((data, index) => (
                         <>
-                            <div className="row-content">
-                                <Dataview key={data._id} data={data} index={index} status={'approved'}/>
+                            <div className="row-content" key={data._id}>
+                                <Dataview data={data} index={index} status={'approved'} />
                             </div>
-                            <div className="row-content">
-                                <Dataview key={data._id} data={data} index={index} status={'pending'}/>
-                            </div>
-                            <div className="row-content">
-                                <Dataview key={data._id} data={data} index={index} status={'rejected'} />
-                            </div>
-                            <div className="row-content">
-                                <Dataview key={data._id} data={data} index={index} status={'returned'} />
-                            </div>
+
                         </>
+
+
                     ))
                 }
 
