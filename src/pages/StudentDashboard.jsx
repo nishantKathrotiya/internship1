@@ -24,7 +24,7 @@ const StudentDashboard = () => {
           <>
             <div className="outerContainer-cards">
               <div className="tiles-container">
-                <MeteorDemo />
+                <MeteorDemo name={"22DIT022"}/>
                 <GridPatternDemo title={"Your Application"} count={25} />
                 <GridPatternDemo title={"Approved Application"} count={10} />
                 <GridPatternDemo title={"Rejected Application"} count={12} />

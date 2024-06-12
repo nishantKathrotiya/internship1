@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { setLoading } from "../../slices/auth";
 import { apiConnector } from "../connector";
 import { setToken, setUser } from "../../slices/profile";
+import Cookies from 'js-cookie';
 
 export function sendOtp(sid, navigate) {
   return async (dispatch) => {
@@ -101,6 +102,7 @@ export function logout(navigate) {
     dispatch(setUser(null));
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    Cookies.remove('token');
     navigate("/");
     toast.success("Logged Out");
   };

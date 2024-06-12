@@ -52,3 +52,6 @@
     color: black; /* Corresponds to text-richblack-25 in Tailwind */
   }
   
+  .inoutSpecial:hover{
+    background-color: #e4e1e1;
+  }

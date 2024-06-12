@@ -102,7 +102,7 @@ const login = async (req, res) => {
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         // generate token (combination of header , payload , signature)
-        expiresIn: "72h", // set expiry time;
+        expiresIn: "72h", // set expiry time; , 
       });
       user.token = token;
       user.password = undefined;

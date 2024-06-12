@@ -6,6 +6,7 @@ import { logout } from "./services/operation/authApi.js";
 import OpenRoute from "./components/OpenRoute";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
+import useAuthCheck from "./components/AuthToken.jsx";
 
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
@@ -17,8 +18,10 @@ import Student from "./pages/Student.jsx";
 import Admin from "./pages/Admin.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import Download from "./pages/Download.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 
 function App() {
+  useAuthCheck();
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.profile);
 
@@ -75,6 +78,7 @@ function App() {
         >
           <Route path="/student" element={<StudentDashboard />} />
           <Route path="/student/application" element={<Form />} />
+          <Route path="/student/admin" element={<AdminDashboard />} />
         </Route>
 
         <Route
