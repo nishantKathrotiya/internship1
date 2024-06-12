@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router()
 
-const  { isLoggedin , isStudent } = require("../middleware/AuthMiddleware");
-const {newApplication  , dashboard} = require("../controller/Student");
 const {isValidForm} = require("../middleware/validation")
+const  { isLoggedin , isStudent } = require("../middleware/AuthMiddleware");
+const {newApplication  , dashboard , viewApplication} = require("../controller/Student");
 
 const {upload} = require("../config/multerConfig");
 
@@ -14,5 +14,6 @@ router.post("/application",isLoggedin , isStudent, upload.fields([
 ]),isValidForm ,newApplication);
 
 router.get("/dashboard" ,isLoggedin , isStudent , dashboard );
+router.get("/viewapplication" ,isLoggedin , isStudent , viewApplication );
 
 module.exports = router;

@@ -39,7 +39,7 @@ const StudentDashboard = () => {
               userData == null ? (<h1>Data Not Found</h1>) : (
                 <>
                   <div className="dataTable-container">
-                    <DataTable userData={userData} />
+                    <DataTable userData={userData} id={'student'} />
                   </div>
                 </>
               )

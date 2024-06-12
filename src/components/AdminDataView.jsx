@@ -3,14 +3,14 @@ import { CiFilter, CiEdit } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
-const AdminDataView = ({data , index , status}) => {
+const AdminDataView = ({data , index}) => {
     return (
         <>
             <div className="colHeader DataNumber">{index + 1}</div>
             <div className="colHeader">{data.paperTitle}</div>
             <div className="colHeader">{data.createdAt.split('T')[0]}</div>
-            <div className="colHeader"><span className={status}>{status}</span></div>
-            <div className="colHeader"><CiEdit /> | <FaRegEye /> | <MdDeleteOutline /></div>
+            <div className="colHeader"><span className={data.status.status}>{data.status.status}</span></div>
+            <div className="colHeader">Admin | <FaRegEye /> | <MdDeleteOutline /></div>
         </>
     )
 }

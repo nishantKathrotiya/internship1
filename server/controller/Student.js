@@ -57,6 +57,10 @@ const newApplication = async (req,res)=>{
             conferenceAcceptance: req.files.conferenceAcceptance[0].filename,
             regFeesProof:req.files.regFeesProof[0].filename,
             indexingProof: req.files.indexingProof[0].filename,
+            status:{
+                status:"pending",
+                msg:null
+            }
         });
 
         //Upadting user and adding the application id to user
@@ -92,7 +96,7 @@ const dashboard = async (req,res)=>{
 
         //passing all the application ids to find all the application
         //but only the few details like [name , date and status]
-        const applications = await applicationModal.find({'_id':{$in:ids}} , {paperTitle:1 ,createdAt:1  });
+        const applications = await applicationModal.find({'_id':{$in:ids}} , {paperTitle:1 ,createdAt:1,status:1  });
 
 
         res.send({
@@ -111,4 +115,37 @@ const dashboard = async (req,res)=>{
     }
 }
 
-module.exports = {newApplication , dashboard}
+const viewApplication = async (req,res)=>{
+    try{
+
+        const {id} = req.query;
+        if(!id){
+            return res.json({
+                success:false,
+                message:"Id Not Found"
+            })
+        }
+
+        //passing all the application ids to find all the application
+        //but only the few details like [name , date and status]
+        const application = await applicationModal.findById(id);
+
+
+        res.send({
+            success:true,
+            application
+        })
+
+
+    }catch(error){
+
+        console.log(error   )
+        res.json({
+            success:false,
+            message:"SomeThing Went Wrong"
+        })
+
+    }
+}
+
+module.exports = {newApplication , dashboard , viewApplication}

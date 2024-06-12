@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AdminDataView from "./AdminDataView";
+import Dataview from "./Dataview";
 import Filter from './Filter';
 import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
 
-const DataTable = ({ userData }) => {
+const DataTable = ({ userData , id }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
     const [sortOrder, setSortOrder] = useState("asc");
@@ -21,7 +22,7 @@ const DataTable = ({ userData }) => {
         }
 
         if (statusFilter !== "all") {
-            filtered = filtered.filter(data => data.status === statusFilter);
+            filtered = filtered.filter(data => data.status.status === statusFilter);
         }
 
         if (specificDate) {
@@ -175,7 +176,10 @@ const DataTable = ({ userData }) => {
 
                 {filteredData.map((data, index) => (
                     <div className="row-content" key={data._id}>
-                        <AdminDataView data={data} index={index} status={'approved'} />
+                        
+                        {
+                            id=='student' ? (<Dataview  data={data} index={index}  />) :  (<AdminDataView data={data} index={index}  />)
+                        }
                     </div>
                 ))}
             </div>
