@@ -4,7 +4,7 @@ import DataTable from "../components/DataTable";
 import "../stylesheets/StudentDashboard.css";
 import MeteorDemo from "../components/Meteors";
 
-import { dashboardDetails } from "../services/operation/student";
+import { dashboardDetails, downloadPDF } from "../services/operation/student";
 import GridPatternDemo from "../components/GridCard";
 
 const StudentDashboard = () => {

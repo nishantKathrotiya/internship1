@@ -21,6 +21,7 @@ body {
   justify-content: start;
   align-items: center;
   overflow: hidden;
+  z-index: 0;
 }
 
 .outerContainer-cards {
@@ -124,7 +125,8 @@ body {
   /* top: 0; */
   padding: 1.2vw;
   display: flex;
-  width: 100%;
+  min-width: 100%;
+  width: fit-content;
   align-items: center;
   justify-content: space-between;
   background-color: #f8f9fa;
@@ -136,6 +138,7 @@ body {
   align-items: center;
   gap: 10px;
   width: 13%;
+  min-width: 200px;
 }
 
 .icon {
@@ -237,4 +240,51 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+
+
+.absoulutContainer{
+  width: 100% ;
+  height: 116%;
+  margin: 0;
+  position: absolute;
+  top: 79px;
+  left: 0;
+  background-color: transparent;
+  backdrop-filter: blur(2px);
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.approvalContainer{
+  width: 40%;
+  height: 40%;
+  padding: 20px;
+  font-family: "poppins";
+  margin-bottom: 16%;
+  border-radius: 10px;
+  border: 2px solid #cdccccda;
+  background-color: #f3f4f8;
+  box-shadow: rgba(0, 0, 0, 0.326) 0px 8px 20px;
+}
+
+.approvalTitle{
+  width: 100%;
+  height: fit-content;
+  font-weight: 500;
+  font-size: larger;
+  display: flex;
+  justify-content: space-between;
+}
+
+.iconBigger{
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  font-weight: 100;
 }

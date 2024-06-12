@@ -4,7 +4,7 @@ const Download = () => {
   useEffect(() => {
     const downloadFile = async () => {
       try {
-        const response = await fetch("http://localhost:4000/download-pdf", {
+        const response = await fetch("http://localhost:4000/student/downloaddocument", {
           method: "GET",
           responseType: "blob",
         });
@@ -18,7 +18,7 @@ const Download = () => {
         const a = document.createElement("a");
         a.style.display = "none";
         a.href = url;
-        a.download = "22DIT017.jpeg";
+        a.download = "JENIL.pdf";
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);

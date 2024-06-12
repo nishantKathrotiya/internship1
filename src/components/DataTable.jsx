@@ -4,7 +4,7 @@ import Dataview from "./Dataview";
 import Filter from './Filter';
 import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
 
-const DataTable = ({ userData , id }) => {
+const DataTable = ({ userData, id , setOpen }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
     const [sortOrder, setSortOrder] = useState("asc");
@@ -152,7 +152,7 @@ const DataTable = ({ userData , id }) => {
     ];
 
     return (
-        <>
+        <div >
             <div className="header-row">
                 Applications
                 <input
@@ -176,14 +176,14 @@ const DataTable = ({ userData , id }) => {
 
                 {filteredData.map((data, index) => (
                     <div className="row-content" key={data._id}>
-                        
+
                         {
-                            id=='student' ? (<Dataview  data={data} index={index}  />) :  (<AdminDataView data={data} index={index}  />)
+                            id == 'student' ? (<Dataview data={data} index={index} />) : (<AdminDataView data={data} index={index} setOpen={setOpen} />)
                         }
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 

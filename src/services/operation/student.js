@@ -64,3 +64,4 @@ export async function dashboardDetails(setUserData , setLoading){
   setLoading(false);
   toast.dismiss(toastId);
 }
+
