@@ -32,7 +32,6 @@ body {
   background: transparent;
 }
 
-
 .tiles-container {
   height: 80%;
   width: 100%;
@@ -45,7 +44,6 @@ body {
   max-height: fit-content;
 }
 
-
 .responsiveGrid {
   font-size: 1vw;
 }
@@ -53,7 +51,6 @@ body {
 .responsiveGrid p:nth-child(2) {
   font-size: 3.5vw;
 }
-
 
 .newApplication-conatainer {
   padding: 20px 20px 20px 40px;
@@ -86,8 +83,6 @@ body {
   background-color: #fff;
   margin-bottom: 20px;
 }
-
-
 
 .header-row {
   padding: 1.2vw;
@@ -144,7 +139,6 @@ body {
 .icon {
   width: 20px;
   height: 20px;
-
 }
 
 .lastCol {
@@ -188,7 +182,7 @@ body {
   border-radius: 5px;
 }
 
-.approved{
+.approved {
   padding: 3px 4px;
   color: #2d6631;
   font-size: small;
@@ -199,7 +193,7 @@ body {
   border-radius: 5px;
 }
 
-.returned{
+.returned {
   padding: 3px 4px;
   color: #815d99;
   font-size: small;
@@ -210,7 +204,6 @@ body {
   border-radius: 5px;
 }
 
-
 .removerBtnCss {
   padding: 0;
   margin: 0;
@@ -218,10 +211,6 @@ body {
   background-color: transparent;
   border: none;
 }
-
-
-
-
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -242,17 +231,14 @@ body {
   background: #555;
 }
 
-
-
-.absoulutContainer{
-  width: 100% ;
+.absoulutContainer {  
+  width: 100%;
   height: 116%;
   margin: 0;
   position: absolute;
   top: 79px;
   left: 0;
   background-color: transparent;
-  backdrop-filter: blur(2px);
   z-index: 40;
   display: flex;
   justify-content: center;
@@ -261,9 +247,9 @@ body {
   overflow-y: hidden;
 }
 
-.approvalContainer{
+.approvalContainer {
   width: 40%;
-  height: 40%;
+  /* height: 20%; */
   padding: 20px;
   font-family: "poppins";
   margin-bottom: 16%;
@@ -273,7 +259,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.326) 0px 8px 20px;
 }
 
-.approvalTitle{
+.approvalTitle {
   width: 100%;
   height: fit-content;
   font-weight: 500;
@@ -282,9 +268,74 @@ body {
   justify-content: space-between;
 }
 
-.iconBigger{
+.iconBigger {
   height: 30px;
   width: 30px;
   cursor: pointer;
   font-weight: 100;
+}
+
+.admin-reject {
+  padding: 3px 4px;
+  color: #cf5152;
+  font-size: large;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: #ffccd1;
+  border: 1px solid #cf5152;
+  border-radius: 5px;
+}
+
+.admin-approve {
+  padding: 3px 4px;
+  color: #2d6631;
+  font-size: large;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: #c8e6c9;
+  border: 1px solid #2d6631;
+  border-radius: 5px;
+}
+
+.admin-return {
+  padding: 3px 4px;
+  color: #815d99;
+  font-size: large;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: #eccfff;
+  border: 1px solid #9d7bb4;
+  border-radius: 5px;
+}
+
+.admin-main-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  justify-content: space-evenly;
+}
+
+.admin-reason {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-reason textarea {
+  margin-top: 28px;
+  width: 25rem;
+  height: 10rem;
+}
+.admin-ok-status{
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  background-color: #1e4ae9;
+  color: white;
+  font-family: "poppins";
+  font-weight: 600;
+  border: none;
+  width: 80px;
+  height: 40px;
+  border-radius: 140px;
+  cursor: pointer;
 }
