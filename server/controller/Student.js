@@ -2,8 +2,13 @@ const userModel = require("../model/userDetails");
 const applicationModal = require("../model/appllication");
 const userDetails = require("../model/userDetails");
 
+
+var html_to_pdf = require('html-pdf-node');
+const {generateHTML} = require("../emailBody/application");
+var fs = require('fs');
 const path = require("path");
 const multer = require("multer");
+
 const newApplication = async (req, res) => {
   try {
     const {
@@ -31,7 +36,7 @@ const newApplication = async (req, res) => {
     } = req.body;
 
     //new entry data at collection
-    const respone = await applicationModal.create({
+    const response = await applicationModal.create({
       fname,
       mname,
       lname,
@@ -66,17 +71,37 @@ const newApplication = async (req, res) => {
     //Upadting user and adding the application id to user
     const updatedUser = await userModel.findByIdAndUpdate(req.user._id, {
       $push: {
-        applications: respone._id,
+        applications: response._id,
       },
-    });
+    },{new:true});
+
+    const html = generateHTML(response)
+
+    let options = { format: "A4" };
+
+    const pdfBuffer = await html_to_pdf.generatePdf({ content: html }, options);
+
+    // Ensure directory exists for user files
+    const userId = String(req.user._id);
+    const filePath = path.join(__dirname, "../Files", userId);
+
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(filePath);
+    }
+
+    const pdfFileName = `${response._id}.pdf`;
+
+    // Write PDF to file system
+    fs.writeFileSync(path.join(filePath, pdfFileName), pdfBuffer);
 
     //Sending the response
     res.json({
       success: true,
-      answer: respone,
+      answer: response,
       message: "Application Submitted",
     });
   } catch (err) {
+    console.log(err)
     res.json({
       success: false,
       message: "SomeThing Went Wrong",
@@ -112,44 +137,5 @@ const dashboard = async (req, res) => {
   }
 };
 
-const viewApplication = async (req, res) => {
-  try {
-    const { id } = req.query;
-    if (!id) {
-      return res.json({
-        success: false,
-        message: "Id Not Found",
-      });
-    }
 
-    //passing all the application ids to find all the application
-    //but only the few details like [name , date and status]
-    const application = await applicationModal.findById(id);
-
-    res.send({
-      success: true,
-      application,
-    });
-  } catch (error) {
-    console.log(error);
-    res.json({
-      success: false,
-      message: "SomeThing Went Wrong",
-    });
-  }
-};
-
-
-const downloadPDF =  (req, res) => {
-    const filePath = path.join(__dirname,"../Files/6662966bf5da26afa215a124/796546874351-conferenceAcceptance.pdf");
-    res.sendFile(filePath, (err) => {
-      if (err) {
-        console.error("Error sending file:", err);
-        res.status(500).send("Error sending file");
-      } else {
-        console.log("Here is the file");
-      }
-    });
-};
-
-module.exports = { newApplication, dashboard, viewApplication, downloadPDF };
+module.exports = { newApplication, dashboard };

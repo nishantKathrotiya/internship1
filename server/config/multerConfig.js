@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
         cb(null, userDirectory);
       },
       filename: (req, file, cb) => {
-        cb(null, '796546874351' + '-' + file.fieldname+`.${file.mimetype.split('/')[1]}`);
+        cb(null,  Date.now()  + '-' + file.fieldname+`.${file.mimetype.split('/')[1]}`);
       }
 });
 

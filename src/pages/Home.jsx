@@ -11,7 +11,7 @@ const Home = () => {
             Making Website is now one of the easiest thing in the world. <br />
             You just need to learn HTML, CSS, Javascript and you are good to go.
           </p>
-          <a href="" className="hero-btn">
+          <a href="https://www.charusat.ac.in/" target="blank" className="hero-btn">
             Visit Us to Know More
           </a>
         </div>

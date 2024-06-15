@@ -11,10 +11,13 @@ const StudentDashboard = () => {
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const getData = ()=>{
+    dashboardDetails(setUserData, setLoading);
+  }
 
   // Getting details as soon as page is loded
   useEffect(() => {
-    dashboardDetails(setUserData, setLoading);
+    getData();
   }, []);
 
   return (
@@ -39,7 +42,7 @@ const StudentDashboard = () => {
               userData == null ? (<h1>Data Not Found</h1>) : (
                 <>
                   <div className="dataTable-container">
-                    <DataTable userData={userData} id={'student'} />
+                    <DataTable userData={userData} id={'student'}/>
                   </div>
                 </>
               )

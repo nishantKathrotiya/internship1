@@ -10,6 +10,8 @@ const dbConnect = require("./config/connect");
 
 const userRoutes = require("./routes/User");
 const studentRoutes = require("./routes/Student");
+const hodRoutes = require("./routes/Hod")
+const adminRoutes = require("./routes/Admin");
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -30,6 +32,8 @@ app.use(
 //routes
 app.use("/auth", userRoutes);
 app.use("/student", studentRoutes);
+app.use("/hod", hodRoutes);
+app.use("/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   return res.json({

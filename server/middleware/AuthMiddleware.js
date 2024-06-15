@@ -8,7 +8,7 @@ exports.isLoggedin = async (req, res ,next) => {
     if (!req.cookies.token) {
       return res.json({
         success: false,
-        msg: "Token Not Found",
+        message: "Token Not Found",
       });
     }
     
@@ -19,7 +19,7 @@ exports.isLoggedin = async (req, res ,next) => {
     if (!userAtDb) {
       return res.json({
         success: false,
-        msg: "Invalid User",
+        message: "Invalid User",
       });
     }
 
@@ -41,7 +41,7 @@ exports.isStudent = async (req, res,next) => {
     if (req.user.role !== "student") {
       return res.send({
         success: false,
-        msg: "You are not User",
+        message: "You are not User",
       });
     }
 
@@ -50,7 +50,7 @@ exports.isStudent = async (req, res,next) => {
     console.log(error)
     return res.json({
       success: false,
-      msg: "error while Verifying User",
+      message: "error while Verifying User",
     });
   }
 };
@@ -60,7 +60,7 @@ exports.isAdmin = async (req, res, next) => {
     if (req.user.role !== "admin") {
       return res.send({
         success: false,
-        msg: "You are not admin",
+        message: "You are not admin",
       });
     }
     console.log("Passed Is admin")
@@ -68,7 +68,25 @@ exports.isAdmin = async (req, res, next) => {
   } catch (error) {
     return res.json({
       success: false,
-      msg: "error while Verifying admin",
+      message: "error while Verifying admin",
     });
   }
 };
+
+exports.isHod = async (req,res,next) => {
+  try {
+    if (req.user.role !== "hod") {
+      return res.send({
+        success: false,
+        message: "You are not admin",
+      });
+    }
+    console.log("Passed Is admin")
+    next();
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: "error while Verifying admin",
+    });
+  }
+}

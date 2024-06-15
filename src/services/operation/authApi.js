@@ -59,9 +59,7 @@ export function signUp(
     dispatch(setLoading(false));
     toast.dismiss(toastId);
   };
-}
-
-export function login(sid, password, navigate) {
+}export function login(sid, password, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
@@ -79,14 +77,10 @@ export function login(sid, password, navigate) {
       toast.success("Login Successful");
       dispatch(setToken(response.data.token));
       dispatch(setUser({ ...response.data.user }));
-
-      // localStorage.setItem("token", JSON.stringify(response.data.token))
+      
       localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem("token", JSON.stringify(response.data.token));
-
-      response.data.user.role === "student"
-        ? navigate("/student")
-        : navigate("/admin");
+      navigate("/admin")
     } catch (error) {
       console.log("LOGIN API ERROR............", error);
       toast.error(error.message);
@@ -95,6 +89,7 @@ export function login(sid, password, navigate) {
     toast.dismiss(toastId);
   };
 }
+
 
 export function logout(navigate) {
   return (dispatch) => {

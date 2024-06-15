@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { MdOutlineFilterAltOff } from "react-icons/md";
 import AdminDataView from "./AdminDataView";
 import Dataview from "./Dataview";
 import Filter from './Filter';
 import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
 
-const DataTable = ({ userData, id , setOpen }) => {
+const DataTable = ({ userData, id, setOpen }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
     const [sortOrder, setSortOrder] = useState("asc");
@@ -57,6 +58,10 @@ const DataTable = ({ userData, id , setOpen }) => {
 
     const handleApprove = () => {
         setStatusFilter('approved');
+    };
+
+    const handleInprogress = () => {
+        setStatusFilter('inprogress');
     };
 
     const handleReject = () => {
@@ -133,6 +138,12 @@ const DataTable = ({ userData, id , setOpen }) => {
         },
         {
             id: "status",
+            title: "Inprogress",
+            icon: null,
+            callBack: handleInprogress
+        },
+        {
+            id: "status",
             title: "Approved",
             icon: null,
             callBack: handleApprove
@@ -152,16 +163,19 @@ const DataTable = ({ userData, id , setOpen }) => {
     ];
 
     return (
-        <div >
+        <div className="DataTable-parant-Container">
             <div className="header-row">
                 Applications
-                <input
-                    type="text"
-                    placeholder="Search"
-                    id="searchInput"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                />
+                <div className="search-wrapper">
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        id="searchInput"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
+                    <MdOutlineFilterAltOff className="iconBigger" onClick={clearFilters} />
+                </div>
             </div>
             <div className="data-table-inner">
                 <div className="header-title-row">

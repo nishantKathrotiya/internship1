@@ -13,7 +13,7 @@ const OpenRoute = ({ children }) => {
   } else {
     return (
       <>
-        <Navigate to="/student" replace={true} />
+        <Navigate to={`/${user.role}`} replace={true} />
       </>
     );
   }

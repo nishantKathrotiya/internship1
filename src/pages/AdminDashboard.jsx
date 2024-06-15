@@ -5,7 +5,7 @@ import PopUp from "../components/PopUp";
 
 import "../stylesheets/StudentDashboard.css";
 
-import { dashboardDetails } from "../services/operation/student";
+import { adminDashboard } from "../services/operation/admin";
 import GridPatternDemo from "../components/GridCard";
 import useOnClickOutside from "../customHooks/useOnClickOutside";
 
@@ -15,9 +15,13 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const ref = useRef(null);
 
+  const getData = ()=>{
+    adminDashboard(setUserData, setLoading);
+  }
+
   // Getting details as soon as page is loaded
   useEffect(() => {
-    dashboardDetails(setUserData, setLoading);
+    getData();
   }, []);
 
   // Event handler for clicking outside the popup
@@ -31,8 +35,8 @@ const AdminDashboard = () => {
         <>
           <div className="outerContainer-cards">
             <div className="tiles-container">
-              <MeteorDemo name={"H.O.D"} />
-              <GridPatternDemo title={"Your Application"} count={25} />
+              <MeteorDemo name={"Admin"} />
+              <GridPatternDemo title={"Total Application"} count={25} />
               <GridPatternDemo title={"Approved Application"} count={10} />
               <GridPatternDemo title={"Rejected Application"} count={12} />
               <GridPatternDemo title={"Returned Application"} count={3} />
@@ -53,7 +57,7 @@ const AdminDashboard = () => {
       {/* Using ref for the PopUp component to detect click outside */}
       {open && (
         <div ref={ref}>
-          <PopUp setOpen={setOpen} />
+          <PopUp setOpen={setOpen} getData={getData} />
         </div>
       )}
     </div>

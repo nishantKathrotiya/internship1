@@ -5,8 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../services/operation/authApi";
 const Navbar = ({bgwhite=false}) => {
-  console.log(bgwhite)
   const { token } = useSelector((state) => state.profile);
+  const { user } = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ const Navbar = ({bgwhite=false}) => {
             ) : (
 
               <>
-                <Link to="/student" className="link"><div className="signup">Dashboard</div></Link>
+                <Link to={`/${user.role}`} className="link"><div className="signup">Dashboard</div></Link>
                 <div className="signup" onClick={()=>dispatch(logout(navigate))}>Log Out</div>
               </>
             )

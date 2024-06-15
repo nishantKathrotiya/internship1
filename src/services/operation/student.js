@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { apiConnector } from "../connector";
+import { b64toBlob } from "../helper";
 
 
 export async function newApplication(formData, setLoading, navigate) {
@@ -64,4 +65,3 @@ export async function dashboardDetails(setUserData , setLoading){
   setLoading(false);
   toast.dismiss(toastId);
 }
-

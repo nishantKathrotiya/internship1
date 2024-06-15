@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import signupImg from "../assets/login.png";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../services/operation/authApi";
+import { useNavigate } from "react-router-dom";
 import "../stylesheets/login.css";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ sid: "", password: "" });
   const { sid, password } = formData;
 
