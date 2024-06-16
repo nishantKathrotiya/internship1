@@ -1,21 +1,37 @@
 import React from 'react'
-import { CiFilter, CiEdit } from "react-icons/ci";
-import Download from "./Download"
-import { FaRegEye } from "react-icons/fa";
+import { CiEdit } from "react-icons/ci";
+import { AiOutlineDownload } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
-import { viewApplication } from '../services/operation/common';
+import { viewApplication , downloadFile } from "../services/operation/common";
+import Menu from './Menu';
+import { downloadData } from '../lib/data';
+import { useNavigate } from 'react-router-dom';
 
-const Dataview = ({data , index }) => {
-    const viewHandler = ()=>{
-        viewApplication(data._id);
+const Dataview = ({ data, index }) => {
+
+    const navigate = useNavigate();
+    
+    const elemnts = {
+        editData: [
+            {
+                name: "Form",
+                function: () => navigate("/edit"),
+            },
+            {
+                name: "File",
+                function: () => navigate("/file"),
+            }
+        ],
+        editIcon : <CiEdit className="icon iconMedium" />,
     }
+
     return (
         <>
-            <div className="colHeader DataNumber">{index+1}</div>
+            <div className="colHeader DataNumber">{index + 1}</div>
             <div className="colHeader">{data.paperTitle}</div>
             <div className="colHeader">{data.createdAt.split('T')[0]}</div>
             <div className="colHeader"><span className={data.status.status}>{data.status.status}</span></div>
-            <div className="colHeader"><CiEdit className="icon iconMedium"/> | <Download applicationID={data._id} /> | <MdDeleteOutline className="icon iconMedium"/></div>
+            <div className="colHeader"><Menu applicationID={data._id} data={elemnts.editData} icon={elemnts.editIcon} /> | <Menu applicationID={data._id} data={downloadData.downloadData} icon={downloadData.downloadIcon} /> | <MdDeleteOutline className="icon iconMedium" /></div>
         </>
     )
 }
