@@ -7,23 +7,27 @@
   padding: 0;
   box-sizing: border-box;
 }
-.bg-white{
+
+.bg-white {
   background-color: white !important;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .navbar {
   width: 100%;
   height: fit-content;
-  padding: 10px 20px 10px 10px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  top:0;
+  top: 0;
   z-index: 100;
+  background-color: white;
 }
-.link{
+
+.link {
   text-decoration: none !important;
 }
 
@@ -35,27 +39,35 @@
   align-items: center;
   gap: 3.625rem;
 }
+
 .bar li {
   cursor: pointer;
 }
+
 .logos {
   display: flex;
   gap: 1vw;
   background-color: transparent;
-}
-.logos img{
-  mix-blend-mode: multiply;
+  align-items: center;
 }
 
-#charusat{
-  mix-blend-mode:multiply !important;
+.logos img {
+  mix-blend-mode: multiply;
+  height: 50px;
+}
+
+#charusat {
+  mix-blend-mode: multiply !important;
 }
 
 .login-signup {
   display: flex;
   gap: 1.5vw;
+  align-items: center;
 }
-.login-signup .signup,.login {
+
+.signup,
+.login {
   cursor: pointer;
   display: flex;
   padding: 0.5vw 1.5vw;
@@ -64,7 +76,69 @@
   gap: 0.625rem;
   flex-shrink: 0;
   border-radius: 2.4375rem;
-  background: #fff;
+  background: #eaf3fb;
   outline: none;
-  border: 1px solid #565656c3;
+  border: 1px solid #035faa5e;
+  font-size: 1rem; /* Initial font size */
+  transition: all 0.5s ease; /* Smooth transition for all properties */
+}
+
+.signup:hover,
+.login:hover {
+  background-color: #0360aa; /* Background color change on hover */
+  color: white;
+  border: 1px solid #0360aa;
+}
+
+.signup:active,
+.login:active {
+  transform: translateY(2px); /* Move the button slightly down when clicked */
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .logos {
+    gap: 0.5vw;
+  }
+
+  .logos img {
+    height: 40px;
+  }
+
+  .login-signup {
+    gap: 1.5vw;
+  }
+
+  .signup,
+  .login {
+    padding: 0.4vw 1.2vw;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 5px;
+  }
+
+  .logos img {
+    height: 35px;
+  }
+
+  .login-signup {
+    gap: 1.5vw; /* Adjusted gap between login and signup buttons */
+  }
+
+  .signup,
+  .login {
+    padding: 0.3vw 0.9vw;
+    font-size: 0.7rem; /* Reduced font size for smaller screens */
+  }
+
+  .link {
+    font-size: 0.7rem; /* Adjusted link font size for smaller screens */
+  }
 }
