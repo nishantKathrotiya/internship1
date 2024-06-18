@@ -34,8 +34,8 @@ const Form = () => {
     regFeesProof: null,
     indexingProof: null,
   });
-  
-  const [loading , setLoading] = useState(false)
+
+  const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
 
   // Handle change function
@@ -43,7 +43,8 @@ const Form = () => {
     const { name, value, type, checked, files } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
+      [name]:
+        type === "checkbox" ? checked : type === "file" ? files[0] : value,
     }));
   };
 
@@ -52,8 +53,7 @@ const Form = () => {
     handleChange(e);
   };
 
-  const validation =()=>{
-
+  const validation = () => {
     const {
       fname,
       mname,
@@ -80,43 +80,43 @@ const Form = () => {
       conferenceAcceptance,
       regFeesProof,
       indexingProof,
-  } = formData;
+    } = formData;
 
-    return  (
-    fname==""
-    || mname==""
-    || lname==""
-    || studentID==""
-    || mobileNumber==""
-    || department==""
-    || pgUg==""
-    || institute==""
-    || attendance==""
-    || paperTitle==""
-    || publisherDetail==""
-    || conferenceName==""
-    || conferenceWebsite==""
-    || regFees==""
-    || indexing==""
-    || facultyCoAuthorName==""
-    || facultyDepartment==""
-    || facultyInstitute==""
-    || !conferenceAcceptance
-    || !regFeesProof
-    || !indexingProof
-    || ((firstAuthor=='No') && (authorFullName=="" || authorRollNo==""))
-    || !confirmation
-    )
-  }
+    return (
+      fname == "" ||
+      mname == "" ||
+      lname == "" ||
+      studentID == "" ||
+      mobileNumber == "" ||
+      department == "" ||
+      pgUg == "" ||
+      institute == "" ||
+      attendance == "" ||
+      paperTitle == "" ||
+      publisherDetail == "" ||
+      conferenceName == "" ||
+      conferenceWebsite == "" ||
+      regFees == "" ||
+      indexing == "" ||
+      facultyCoAuthorName == "" ||
+      facultyDepartment == "" ||
+      facultyInstitute == "" ||
+      !conferenceAcceptance ||
+      !regFeesProof ||
+      !indexingProof ||
+      (firstAuthor == "No" && (authorFullName == "" || authorRollNo == "")) ||
+      !confirmation
+    );
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(validation()){
+    if (validation()) {
       return toast.error("Fill All the Fields");
     }
     // Process the form data here
     console.log(formData);
-    newApplication(formData,setLoading,navigate);
+    newApplication(formData, setLoading, navigate);
   };
 
   return (
@@ -499,7 +499,7 @@ const Form = () => {
                   </div>
                 </div>
 
-                <div className="Institute">
+                <div className="faculty-Institute">
                   <label htmlFor="facultyInstitute">
                     Faculty Co-Author Institute
                   </label>
@@ -545,10 +545,12 @@ const Form = () => {
                 />
               </div>
               <div className="reg-fees-proof">
-                <label htmlFor="regFeesProof">2. Proof of Registration Fees</label>
+                <label htmlFor="regFeesProof">
+                  2. Proof of Registration Fees
+                </label>
                 <input
                   type="file"
-                   accept=".pdf"
+                  accept=".pdf"
                   id="regFeesProof"
                   name="regFeesProof"
                   onChange={handleChange}
@@ -560,7 +562,7 @@ const Form = () => {
                 </label>
                 <input
                   type="file"
-                   accept=".pdf"
+                  accept=".pdf"
                   id="indexingProof"
                   name="indexingProof"
                   onChange={handleChange}

@@ -1,292 +1,281 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
-
+/* Reset CSS */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #000;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.03375rem;
 }
 
-.parentAdjuster{
-  width: 100%;
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@400;600&display=swap");
+
+/* Form Container */
+.parentAdjuster {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 20px; /* Ensure there's padding to avoid touching the screen edges */
 }
 
-.application-form-container{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  max-width: 1800px;
-}
-
-
-.actualContainer{
-  width: 98%;
-}
-
-input[type="text"] {
-  padding: 12px;
-  font-size: 1rem;
-  font-family: "Nunito";
-  margin-top: 10px;
-  border-radius: 0.75rem;
-  border: 1px solid #d3d3d3;
-}
-
-input[type="number"] {
-  padding: 12px;
-  font-size: 1rem;
-  font-family: "Nunito";
-  margin-top: 10px;
-  border-radius: 0.75rem;
-  border: 1px solid #d3d3d3;
-}
-
-input[type="tel"] {
-  padding: 12px;
-  font-size: 1rem;
-  font-family: "Nunito";
-  margin-top: 10px;
-  border-radius: 0.75rem;
-  border: 1px solid #d3d3d3;
-}
-
-select {
-  padding: 12px;
-  font-size: 1rem;
-  font-family: "Nunito";
-}
-
-::placeholder {
-  font-size: 1rem;
-  color: #797979;
-}
-
-.main-text {
-  width: 100%;
-  padding-top: 2.94rem;
-  text-align: center;
-  color: var(--Primary-text, #0c1421);
-  font-family: Poppins;
-  font-size: 2rem;
-  font-style: normal;
+body {
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.06rem;
+  line-height: 1.6;
+  color: #000;
+  background-color: #f8f9fa; /* Adjust background color as needed */
+  font-size: 16px; /* Set a default font size */
 }
 
-
-
-.name-input {
-  width: 18.9375rem;
+/* Form Container */
+.application-form-container {
+  width: 100%;
+  max-width: 90vw; /* Adjust maximum width as needed */
+  padding: 4vw; /* Adjust padding for smaller screens */
+  background-color: #fff; /* Form background color */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Box shadow for form */
+  display: flex; /* Add flex display */
+  flex-direction: column; /* Stack elements vertically on small screens */
+  align-items: center; /* Center items horizontally */
+  overflow-x: hidden; /* Hide horizontal overflow */
+  font-size: 16px; /* Default font size within the form container */
 }
 
-.name-main-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 4.5rem;
-  margin-left: 13.3rem;
-  margin-right: 13.3rem;
+.actualContainer {
+  width: 100%;
 }
 
-.student-ID-Input {
-  width: 28rem;
-}
-
-.mobile-number-Input {
-  width: 28rem;
-}
-
-.student-mobile-main-container {
-  display: flex;
-  justify-content: space-between;
-  margin-left: 13.25rem;
-  margin-right: 13.25rem;
-  margin-top: 3rem;
-}
-
-.department-pg-ug-main-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  margin-left: 13.25rem;
-  margin-right: 13.25rem;
-}
-.department-radio {
-  display: flex;
-  justify-content: space-between;
-  gap: 3rem;
-}
-.department-radio input {
-  size: 2rem;
-  margin-top: 18px;
-  margin-left: 0.6rem;
-}
-.pg-ug-radio {
-  display: flex;
-  gap: 3rem;
-}
-
-.pg-ug-container {
-  width: 28rem;
-}
-.pg-ug-container input {
-  margin-left: 0.6rem;
-  margin-top: 18px;
-}
-.Institute-Attendence-main-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  margin-left: 13.25rem;
-  margin-right: 13.25rem;
-}
-.Institute select {
-  border-radius: 0.75rem;
-  border: 1px solid #d3d3d3;
-  background: #fff;
-  width: 28rem;
-  height: 3rem;
+/* Input Styles */
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+select {
+  height: 42px;
+  width: 100%;
+  padding: 12px;
   margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #d3d3d3;
+  font-size: 1rem;
 }
 
-.Attendence input {
-  width: 28rem;
+/* Main Text */
+.main-text {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-.paper-publisher-main-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  margin-left: 13.25rem;
-  margin-right: 13.25rem;
-}
-.conference-main-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  margin-left: 13.25rem;
-  margin-right: 13.25rem;
-}
-.paper-publisher-main-container input {
-  width: 28rem;
-}
-.conference-main-container input {
-  width: 28rem;
-}
-.fees-indexing-main-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  margin-left: 13.25rem;
-  margin-right: 24.7rem;
-}
-.reg-fees input {
-  width: 28rem;
-}
-.Indexing {
-  display: flex;
-  gap: 3rem;
-}
-
-.Indexing input {
-  margin-top: 28px;
-  margin-left: 0.6rem;
-}
-.radio-input {
-  display: flex;
-  gap: 3rem;
-}
-.first-author {
-  margin-top: 3rem;
-  margin-left: 13.25rem;
-  margin-right: 24.7rem;
-}
-.radio-input input {
-  margin-top: 18px;
-  margin-left: 0.6rem;
-}
+/* Single Div */
+.first-author,
 .faculty-co-author {
-  margin-top: 3rem;
-  margin-left: 13.25rem;
-  margin-right: 24.7rem;
-}
-.faculty-co-author input {
-  width: 67rem;
+  margin-top: 2rem;
 }
 
-.faculty-department-radio {
-  display: flex;
-  gap: 3rem;
+.Institute select,
+.faculty-Institute select {
+  margin-top: 10px; /* Add margin-top to Institute container */
 }
-.faculty-department-radio input {
-  margin-top: 28px;
-  margin-left: 0.6rem;
+
+/* Radio Button */
+.department-radio input[type="radio"],
+.pg-ug-radio input[type="radio"],
+.radio-input input[type="radio"],
+.Indexing input[type="radio"],
+.faculty-department-radio input[type="radio"] {
+  margin-left: 5px; /* Add margin to the left of radio buttons */
 }
+
+/* Name Container */
+.name-main-container,
+.student-mobile-main-container,
+.department-pg-ug-main-container,
+.Institute-Attendence-main-container,
+.paper-publisher-main-container,
+.conference-main-container,
+.fees-indexing-main-container,
+.author-detail,
+.attechments,
 .faculty-department-institute-main-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 3rem;
-  margin-left: 13.3rem;
-  margin-right: 13.3rem;
+  margin-top: 2rem;
 }
-.author-detail {
+
+.fname-container,
+.mname-container,
+.lname-container {
+  width: 20vw;
+}
+
+.student-ID-container,
+.mobile-number-container,
+.department-container,
+.pg-ug-container,
+.Attendence,
+.Institute,
+.paper-title,
+.publisher-detail,
+.conference-name,
+.conference-website,
+.scopus-web-radio,
+.reg-fees,
+.author-name,
+.roll-no,
+.faculty-department-container,
+.faculty-Institute {
+  width: 28vw;
+}
+
+/* Department and PG/UG Container */
+.department-radio,
+.pg-ug-radio,
+.Indexing,
+.radio-input,
+.faculty-department-radio {
   display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  margin-left: 13.3rem;
-  margin-right: 13.3rem;
+  gap: 2rem;
+  margin-top: 10px;
 }
-.author-detail input {
-  width: 28rem;
+
+/* Faculty Co-Author Input */
+.faculty-co-author input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #d3d3d3;
+  font-size: 1rem;
 }
+
 .confirmation {
-  margin-top: 5rem;
-  margin-left: 13.3rem;
-  margin-right: 13.3rem;
+  display: flex;
+  align-items: center; /* Aligns checkbox and label in the center */
+  width: 100%; /* Ensures the confirmation div takes full width */
+  margin-top: 3rem;
 }
-.confirmation input {
-  margin-right: 1rem;
+
+.confirmation input[type="checkbox"] {
+  margin-right: 10px; /* Adds space between checkbox and label */
 }
-.confirmation label {
-  font-weight: 550;
+
+/* Custom File Upload */
+.file-upload-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 }
+
 .attechments {
-  font-size: 1.2rem;
-  margin-top: 5rem;
-  margin-left: 13.3rem;
-  margin-right: 13.3rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-block;
+  word-wrap: break-word; /* Ensure long words or URLs break and wrap */
+  overflow-wrap: break-word; /* Ensure long words or URLs break and wrap */
+  width: 100%; /* Make sure the attachment title takes the full width of the container */
 }
+
+.attechments > * {
+  margin-top: 2rem; /* Adjust the value as needed */
+}
+
+/* Submit Button */
 .submit {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 2rem;
 }
+
 .submit button {
-  margin-top: 5rem;
   background-color: #1e4ae9;
   color: white;
-  font-family: "poppins";
   font-weight: 600;
-  letter-spacing: 0.5px;
   border: none;
-  width: 158px;
-  height: 50px;
-  border-radius: 140px;
-  margin-bottom: 10px;
-  margin-bottom: 3rem;
+  border-radius: 25px;
+  padding: 12px 24px;
   cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .application-form-container {
+    font-size: 14px;    
+    padding: 4vw;
+  }
+
+  .name-main-container,
+  .student-mobile-main-container,
+  .department-pg-ug-main-container,
+  .Institute-Attendence-main-container,
+  .paper-publisher-main-container,
+  .conference-main-container,
+  .fees-indexing-main-container,
+  .author-detail,
+  .attechments {
+    flex-direction: column;
+    width: 80vw;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  select,
+  .fname-container,
+  .mname-container,
+  .lname-container,
+  .student-ID-container,
+  .mobile-number-container,
+  .department-container,
+  .pg-ug-container,
+  .Attendence,
+  .Institute,
+  .paper-title,
+  .publisher-detail,
+  .conference-name,
+  .conference-website,
+  .scopus-web-radio,
+  .reg-fees,
+  .author-name,
+  .roll-no,
+  .faculty-department-container,
+  .faculty-Institute {
+    width: 100%;  
+  }
+
+  .fname-container,
+  .mname-container,
+  .lname-container,
+  .mobile-number-container, 
+  .Attendence,
+  .publisher-detail,
+  .conference-website,
+  .scopus-web-radio,
+  .pg-ug-container,
+  .faculty-Institute,
+  .roll-no {
+    margin-top: 2rem;
+  }
+
+  /* You can also adjust font sizes for specific elements if needed */
+  .main-text {
+    font-size: 1rem; /* Adjust main text font size */
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  select,
+  textarea {
+    font-size: 0.9rem; /* Adjust input font size */
+  }
+
+  .submit button {
+    width: calc(100% - 24px); /* Adjust button width */
+  }
 }
