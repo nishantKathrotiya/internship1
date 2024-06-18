@@ -9,66 +9,77 @@ require("dotenv").config();
 
 //signUp
 const signUp = async (req, res) => {
-  let {
-    firstName,
-    lastName,
-    sid,
-    password,
-    confirmPassword,
-    otp,
-    accountType,
-  } = req.body;
+  try{
+    let {
+      firstName,
+      lastName,
+      sid,
+      password,
+      confirmPassword,
+      otp,
+      accountType,
+    } = req.body;
+    
+    console.log(req.body)
+    if (
+      !firstName||
+      !lastName ||
+      !sid ||
+      !password ||
+      !confirmPassword ||
+      !otp
+    ) {
+      return res.json({
+        success: false,
+        msg: "Fill All the Fields",
+      });
+    }
+    sid = sid.toLowerCase();
+    const userPresent = await userModel.findOne({ sid: sid });
   
-  console.log(req.body)
-  if (
-    !firstName||
-    !lastName ||
-    !sid ||
-    !password ||
-    !confirmPassword ||
-    !otp
-  ) {
+    if (userPresent) {
+      return res.json({
+        success: false,
+        msg: "User Alredy Exist",
+      });
+    }
+  
+    const findOtp = await otpModel
+    .find( {sid:sid.toLowerCase()} )
+    .sort({ createdAt: -1 })
+    .limit(1);
+  
+  
+  
+    if (findOtp[0].otp !== otp) {
+      console.log(otp);
+      return res.json({
+        success: false,
+        msg: "OTP Does not match",
+      });
+    }
+    const hasedPassword = await bcrypt.hash(password, 10);
+  
+    const registredUser = await userModel.create({
+      sid,
+      password: hasedPassword,
+      role: accountType || "student",
+    });
+  
+    return res.json({
+      success: true,
+      msg: "User Registred",
+    });
+
+  }catch(error){
+
+    console.log(error);
     return res.json({
       success: false,
-      msg: "Fill All the Fields",
+      message: "Signup Failure, please try again",
     });
+    
   }
-  sid = sid.toLowerCase();
-  const userPresent = await userModel.findOne({ sid: sid });
-
-  if (userPresent) {
-    return res.json({
-      success: false,
-      msg: "User Alredy Exist",
-    });
-  }
-
-  const findOtp = await otpModel
-  .find( {sid:sid.toLowerCase()} )
-  .sort({ createdAt: -1 })
-  .limit(1);
-
-
-
-  if (findOtp[0].otp !== otp) {
-    console.log(otp);
-    return res.json({
-      success: false,
-      msg: "OTP Does not match",
-    });
-  }
-  const hasedPassword = await bcrypt.hash(password, 10);
-
-  const registredUser = await userModel.create({
-    sid,
-    password: hasedPassword,
-    role: accountType || "student",
-  });
-
-  return res.json({
-    success: true,
-    msg: "User Registred",
-  });
 };
 
 //Login
@@ -209,7 +220,4 @@ const updateUser = async (req,res) => {
   }
 };
 
-// Controller for Changing Password
-const changePassword = async (req, res) => {};
-
-module.exports = { signUp, login, sendOTP, changePassword,updateUser };
+module.exports = { signUp, login, sendOTP,updateUser };

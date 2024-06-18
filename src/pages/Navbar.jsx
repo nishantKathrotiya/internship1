@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../services/operation/authApi";
 
-const Navbar = ({ bgwhite = false }) => {
+const Navbar = () => {
   const { token } = useSelector((state) => state.profile);
   const { user } = useSelector((state) => state.profile);
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Navbar = ({ bgwhite = false }) => {
 
   return (
     <>
-      <section className={bgwhite ? "navbar bg-white" : "navbar"}>
+      <section className={"navbar"}>
         <Link to="/">
           <div className="logos">
             <img src={charusatlogo} alt="Charusat Logo" />

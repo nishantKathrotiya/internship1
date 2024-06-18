@@ -6,7 +6,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 const Student = () => {
   return (
     <div>
-      <Navbar bgwhite={true} />
+      <Navbar />
       <div className="margin">
         <Outlet />
       </div>

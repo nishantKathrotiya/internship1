@@ -6,7 +6,7 @@ import {Outlet} from 'react-router-dom';
 const Admin = () => {
   return (
     <div>
-        <Navbar bgwhite={true}/>
+        <Navbar />
         <div className='margin'>
           <Outlet />
         </div>
