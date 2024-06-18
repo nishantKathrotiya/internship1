@@ -95,9 +95,11 @@
 }
 
 
-.signup-form-container h1 {
-    width: 100%;
-    font-family: "poppins";
+
+.signupTitle {
+    font-family: 'poppins';
+    font-size: 3vw;
+    margin-bottom: 30px;
 }
 
 .signup-submit {
@@ -129,4 +131,63 @@
     border-radius: 140px;
     margin-bottom: 10px;
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .signup-image {
+        display: none;
+        width: 0;
+    }
+
+    .signup-container {
+        width: 100%;
+        padding: 0;
+    }
+
+    .signup-form-container {
+        height: fit-content;
+        width: 90%;
+        padding: 5vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: 1px solid #dadadada;
+        border-radius: 3vw;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .signupTitle {
+        font-family: 'poppins';
+        font-size: 10vw;
+        margin-bottom: 5px;
+    }
+
+    .signup-form {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .input-container > label {
+        font-family: "open sans";
+        font-size: 3vw;
+        font-weight: 500;
+        display: block;
+        padding: 5px 0;
+    }
+
+    .input-container input {
+        width: 100%;  
+        font-family: "nunito";
+        font-size: 5vw;  
+        font-weight: 500;
+        padding: 10px; 
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+    }
+
+    .signup-submit {
+        width: 100%;
+        margin-top: 20px;
+    }
 }

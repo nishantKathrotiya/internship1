@@ -29,15 +29,14 @@ const Login = () => {
   return (
     <div>
       <Navbar />
-      <div className="signup-main-container">
-        <div className="signup-image">
+      <div className="login-main-container">
+        <div className="login-image">
           <img src={signupImg} alt="signup-image" />
         </div>
 
-        <div className="signup-container">
+        <div className="login-container">
           <div className="login-form-container">
-            <h1>Login</h1>
-
+            <h1m className="loginTitle">Login</h1m>
             <div className="login-form">
               <div className="login-input-container">
                 <label htmlFor="studentID">Student Id *</label>
@@ -54,6 +53,7 @@ const Login = () => {
                 <label htmlFor="password">Password *</label>
                 <input
                   type="password"
+                  className="passwordFix"
                   placeholder="8 charchter long"
                   id="password"
                   name="password"

@@ -14,6 +14,24 @@
     align-items: center;
 }
 
+.sendotp-title{
+    font-size: 3vw;
+}
+
+.sendtop-image {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sendtop-image img {
+    width: 60%;
+    height: auto;
+
+}
+
 .sendotp-form-container {
     width: 100%;
     display: flex;
@@ -130,4 +148,44 @@
     border: none;
     color: #0C1421;
     font-weight: 600;
+}
+
+@media (max-width:768px) {
+    .sendtop-image {
+        display: none;
+    }
+   
+    .sendotp-main-container , .sendotp-container , .sendotp-form, .lastSectionAtVerify_22{
+        width: 100%;
+    }
+    .sendotp-form-container{
+        width: 90%;
+        padding: 5vw;
+        overflow: hidden;
+        border: 1px solid #dadadada;
+        border-radius: 3vw;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .inputAtOTP_22 {
+        background-color: #fff;
+        border: 1px solid #c9c9c9;
+        border-radius: 5px !important;
+        padding: 0px !important;
+        width: 40px !important;
+        aspect-ratio: 1/1 !important;
+    }
+    
+
+    .paraAtVerify_22{
+        font-size: 4vw !important;
+    }
+
+    .lastSectionAtVerify_22{
+        margin-top: 50px;
+        padding: 2vw;
+    }
+    .sendotp-title{
+        font-size: 10vw;
+    }
 }

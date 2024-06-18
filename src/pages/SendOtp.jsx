@@ -42,14 +42,14 @@ const SendOtp = () => {
             {
                 loading ? (<>Loading</>) : (
                     <div className='sendotp-main-container'>
-                        <div className='signup-image'>
-                            <img src={optImg} alt='signup-image' />
+                        <div className='sendtop-image'>
+                            <img src={optImg} alt='sendtop-image' />
                         </div>
 
                         <div className='sendotp-container'>
 
                             <div className='sendotp-form-container'>
-                                <h1>Verify-email</h1>
+                                <h1 className='sendotp-title'>Verify-email</h1>
 
                                 <div className='sendotp-form'>
                                     <form className='verifyEmailForm_22' >

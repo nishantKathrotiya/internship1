@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { newApplication } from "../services/operation/student";
 import "../stylesheets/Form.css";
+import "../stylesheets/Navbar.css"
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
