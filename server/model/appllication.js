@@ -45,6 +45,29 @@ const applicationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  coAuthors:[{
+    studentName: {
+      type: String,
+    },
+    studentID: {
+      type: String,
+    },
+    studentDepartment: {
+      type: String,
+      enum: ["CE", "CS", "IT"],
+    },
+    studentPGUG: {
+      type: String,
+      enum: ["PG", "UG"],
+    },
+    studentInstitute:{
+      type: String,
+      enum: ["CSPIT", "DEPSTAR"],
+    },
+    studentAttendace:{
+      type: Number,
+    },
+  }],
   paperTitle: {
     type: String,
     required: true,
@@ -87,21 +110,19 @@ const applicationSchema = new mongoose.Schema({
       return this.firstAuthor === "No";
     },
   },
-  facultyCoAuthorName: {
-    type: String,
-    required: true,
-  },
-  facultyDepartment: {
-    type: String,
-    required: true,
-    enum: ["CE", "CS", "IT"],
-  },
-  facultyInstitute: {
-    type: String,
-    required: true,
-    enum: ["DEPSTAR", "CSPIT"],
-    default: "DEPSTAR",
-  },
+  facultyCoAuthors: [{
+    facultyCoAuthorName: {
+      type: String,
+    },
+    facultyCoAuthorDepartment: {
+      type: String,
+      enum: ["CE", "CS", "IT"],
+    },
+    facultyInstitute:{
+      type: String,
+      enum: ["DEPSTAR", "CSPIT"],
+    },
+  }],
   conferenceAcceptance: {
     type: String,
     required: true,

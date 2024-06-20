@@ -30,9 +30,8 @@ const newApplication = async (req, res) => {
       firstAuthor,
       authorFullName,
       authorRollNo,
-      facultyCoAuthorName,
-      facultyDepartment,
-      facultyInstitute,
+      facultyCoAuthors,
+      coAuthors,
     } = req.body;
 
     //new entry data at collection
@@ -47,6 +46,7 @@ const newApplication = async (req, res) => {
       pgUg,
       institute,
       attendance,
+      coAuthors :JSON.parse(coAuthors) ,
       paperTitle,
       publisherDetail,
       conferenceName,
@@ -56,9 +56,7 @@ const newApplication = async (req, res) => {
       firstAuthor,
       authorFullName: firstAuthor == "Yes" ? null : authorRollNo,
       authorRollNo: firstAuthor == "Yes" ? null : authorFullName,
-      facultyCoAuthorName,
-      facultyDepartment,
-      facultyInstitute,
+      facultyCoAuthors:JSON.parse(facultyCoAuthors),
       conferenceAcceptance: req.files.conferenceAcceptance[0].filename,
       regFeesProof: req.files.regFeesProof[0].filename,
       indexingProof: req.files.indexingProof[0].filename,

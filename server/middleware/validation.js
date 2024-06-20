@@ -1,77 +1,89 @@
-
-
-
 exports.isValidForm = async (req, res, next) => {
-  console.log(req.files);
-  if(Object.keys(req.body).length === 0){
+  if (Object.keys(req.body).length === 0) {
     res.json({
-      success:false,
-      message:"File Upload Fails"
-    })
+      success: false,
+      message: "File Upload Fails",
+    });
   }
-  
-    try {
-        const {
-            fname,
-            mname,
-            lname,
-            studentID,
-            mobileNumber,
-            department,
-            pgUg,
-            institute,
-            attendance,
-            paperTitle,
-            publisherDetail,
-            conferenceName,
-            conferenceWebsite,
-            regFees,
-            indexing,
-            firstAuthor,
-            authorFullName,
-            authorRollNo,
-            facultyCoAuthorName,
-            facultyDepartment,
-            facultyInstitute,
-        } = req.body;
-        
-        if(
-             fname==""
-            || mname==""
-            || lname==""
-            || studentID==""
-            || mobileNumber==""
-            || department==""
-            || pgUg==""
-            || institute==""
-            || attendance==""
-            || paperTitle==""
-            || publisherDetail==""
-            || conferenceName==""
-            || conferenceWebsite==""
-            || regFees==""
-            || indexing==""
-            || facultyCoAuthorName==""
-            || facultyDepartment==""
-            || facultyInstitute==""
-            || ((firstAuthor=='No') && (authorFullName=="" || authorRollNo==""))
-        ){
 
-        
-            return res.json({
-                success:false,
-                message:"All Field Required"
-            });
-        }
+  const validation = () => {
+    const {
+      fname,
+      mname,
+      lname,
+      studentID,
+      mobileNumber,
+      department,
+      pgUg,
+      institute,
+      attendance,
+      paperTitle,
+      publisherDetail,
+      conferenceName,
+      conferenceWebsite,
+      regFees,
+      indexing,
+      firstAuthor,
+      authorFullName,
+      authorRollNo,
+      facultyCoAuthors,
+      coAuthors,
+    } = req.body;
 
-        next();
+    // Check if any of the fields are empty or null
+    const isEmpty = (value) =>
+      value === "" || value === null || value === undefined;
 
-    } catch (error) {
-      console.log(error)
+    // Validate each field
+    const isFormValid =
+      !isEmpty(fname) &&
+      !isEmpty(mname) &&
+      !isEmpty(lname) &&
+      !isEmpty(studentID) &&
+      !isEmpty(mobileNumber) &&
+      !isEmpty(department) &&
+      !isEmpty(pgUg) &&
+      !isEmpty(institute) &&
+      !isEmpty(attendance) &&
+      !isEmpty(paperTitle) &&
+      !isEmpty(publisherDetail) &&
+      !isEmpty(conferenceName) &&
+      !isEmpty(conferenceWebsite) &&
+      !isEmpty(regFees) &&
+      !isEmpty(indexing) &&
+      (firstAuthor === "Yes" || (!isEmpty(authorFullName) && !isEmpty(authorRollNo))) &&
+      JSON.parse(coAuthors).every(coAuthor => (
+        !isEmpty(coAuthor.studentName) &&
+        !isEmpty(coAuthor.studentID) &&
+        !isEmpty(coAuthor.studentDepartment) &&
+        !isEmpty(coAuthor.studentPGUG) &&
+        !isEmpty(coAuthor.studentInstitute) &&
+        !isEmpty(coAuthor.studentAttendace)
+      )) &&
+
+      JSON.parse(facultyCoAuthors).every(facultyCoAuthor => (
+        !isEmpty(facultyCoAuthor.facultyCoAuthorName) &&
+        !isEmpty(facultyCoAuthor.facultyCoAuthorDepartment) &&
+        !isEmpty(facultyCoAuthor.facultyInstitute)
+      ))
+
+    return !isFormValid;
+  };
+
+  try {
+    if (validation()) {
       return res.json({
         success: false,
-        msg: "error while checking Data",
+        message: "All Field Required",
       });
-      
     }
-  };
+
+    next();
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      msg: "error while checking Data",
+    });
+  }
+};

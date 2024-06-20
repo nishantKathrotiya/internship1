@@ -185,13 +185,13 @@ select {
 }
 
 /* Submit Button */
-.submit {
+.form-submit {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
 }
 
-.submit button {
+.form-submit button {
   background-color: #1e4ae9;
   color: white;
   font-weight: 600;
@@ -202,8 +202,51 @@ select {
   font-size: 1rem;
 }
 
+
+.num-students-container{
+  margin-top: 2rem;
+}
+.co-author-wrapper1{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.co-author-wrapper1 > .pg-ug , .department{
+  width: 34%;
+  margin-top: 2rem;
+}
+
+.Institute-Attendence-co-author-container{
+  width:100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.Institute-Attendence-co-author-container > .attendance , .institute{
+  width: 34%;
+}
+.hr{
+  width: 100%;
+  height: 20px;
+  border-bottom: 1px dashed #323232;
+  margin: 0;
+  padding: 0;
+}
+.num-faculty-co-authors-container{
+  margin-top: 2rem;
+}
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
+
+  .co-author-wrapper1{
+    width: 100%;
+  }
+  
   .application-form-container {
     font-size: 14px;    
     padding: 4vw;
@@ -278,4 +321,28 @@ select {
   .submit button {
     width: calc(100% - 24px); /* Adjust button width */
   }
+
+  
+  .co-author-wrapper1{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+.co-author-wrapper1 > .pg-ug , .department{
+  width: 100%;
+}
+
+.Institute-Attendence-co-author-container{
+  width:100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.Institute-Attendence-co-author-container > .attendance , .institute{
+  width: 100%;
+}
 }
