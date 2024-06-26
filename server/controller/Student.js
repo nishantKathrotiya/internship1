@@ -34,6 +34,29 @@ const newApplication = async (req, res) => {
       coAuthors,
     } = req.body;
 
+    var departmentInvolved =[];
+    departmentInvolved.push(department);
+  
+    JSON.parse(coAuthors).forEach((student)=>{
+      if(departmentInvolved.indexOf(student.studentDepartment)==-1){
+        departmentInvolved.push(student.studentDepartment)
+      }
+    });
+
+    JSON.parse(facultyCoAuthors).forEach((faculty)=>{
+      if(departmentInvolved.indexOf(faculty.facultyCoAuthorDepartment)==-1){
+        departmentInvolved.push(faculty.facultyCoAuthorDepartment)
+      }
+    });
+
+    var hodStatus = {};
+     departmentInvolved.forEach((department)=> {
+      hodStatus[`${department}`] = {
+        status:'pending',
+        nsg:null
+      }
+    } );
+
     //new entry data at collection
     const response = await applicationModal.create({
       fname,
@@ -64,6 +87,8 @@ const newApplication = async (req, res) => {
         status: "pending",
         msg: null,
       },
+      departmentInvolved,
+      hodStatus
     });
 
     //Upadting user and adding the application id to user

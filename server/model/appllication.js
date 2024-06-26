@@ -45,29 +45,31 @@ const applicationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  coAuthors:[{
-    studentName: {
-      type: String,
+  coAuthors: [
+    {
+      studentName: {
+        type: String,
+      },
+      studentID: {
+        type: String,
+      },
+      studentDepartment: {
+        type: String,
+        enum: ["CE", "CS", "IT"],
+      },
+      studentPGUG: {
+        type: String,
+        enum: ["PG", "UG"],
+      },
+      studentInstitute: {
+        type: String,
+        enum: ["CSPIT", "DEPSTAR"],
+      },
+      studentAttendace: {
+        type: Number,
+      },
     },
-    studentID: {
-      type: String,
-    },
-    studentDepartment: {
-      type: String,
-      enum: ["CE", "CS", "IT"],
-    },
-    studentPGUG: {
-      type: String,
-      enum: ["PG", "UG"],
-    },
-    studentInstitute:{
-      type: String,
-      enum: ["CSPIT", "DEPSTAR"],
-    },
-    studentAttendace:{
-      type: Number,
-    },
-  }],
+  ],
   paperTitle: {
     type: String,
     required: true,
@@ -110,19 +112,21 @@ const applicationSchema = new mongoose.Schema({
       return this.firstAuthor === "No";
     },
   },
-  facultyCoAuthors: [{
-    facultyCoAuthorName: {
-      type: String,
+  facultyCoAuthors: [
+    {
+      facultyCoAuthorName: {
+        type: String,
+      },
+      facultyCoAuthorDepartment: {
+        type: String,
+        enum: ["CE", "CS", "IT"],
+      },
+      facultyInstitute: {
+        type: String,
+        enum: ["DEPSTAR", "CSPIT"],
+      },
     },
-    facultyCoAuthorDepartment: {
-      type: String,
-      enum: ["CE", "CS", "IT"],
-    },
-    facultyInstitute:{
-      type: String,
-      enum: ["DEPSTAR", "CSPIT"],
-    },
-  }],
+  ],
   conferenceAcceptance: {
     type: String,
     required: true,
@@ -139,13 +143,33 @@ const applicationSchema = new mongoose.Schema({
     status: {
       type: String,
       required: true,
-      enum: ["pending", "inprogress" , "approved", "rejected", "returned"],
+      enum: ["pending", "inprogress", "approved", "rejected", "returned"],
     },
     msg: {
       type: String,
-      default:null
+      default: null,
     },
   },
+  hodStatus: {
+    type: Map,
+    of: new mongoose.Schema({
+      status: {
+        type: String,
+        required: true,
+      },
+      msg: {
+        type: String,
+        default: null,
+      },
+    }),
+  },
+
+  departmentInvolved: [
+    {
+      type: String,
+      enum: ["IT", "CE", "CS"],
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
