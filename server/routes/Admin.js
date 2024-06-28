@@ -2,10 +2,10 @@ const express = require("express")
 const router = express.Router()
 
 const {dashboard , updateStatus } = require("../controller/Admin");
-const { isLoggedin , isAdmin } = require("../middleware/AuthMiddleware");
+const { isLoggedin , isCommittee } = require("../middleware/AuthMiddleware");
 
-router.get("/dashboard" ,isLoggedin , isAdmin , dashboard );
-router.post("/update" ,isLoggedin , isAdmin , updateStatus );
+router.get("/dashboard" ,isLoggedin , isCommittee , dashboard );
+router.post("/update" ,isLoggedin , isCommittee , updateStatus );
 
 
 module.exports = router;

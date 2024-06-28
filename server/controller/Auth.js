@@ -61,6 +61,8 @@ const signUp = async (req, res) => {
     const hasedPassword = await bcrypt.hash(password, 10);
   
     const registredUser = await userModel.create({
+      firstName,
+      lastName,
       sid,
       password: hasedPassword,
       role: accountType || "student",
@@ -220,4 +222,63 @@ const updateUser = async (req,res) => {
   }
 };
 
-module.exports = { signUp, login, sendOTP,updateUser };
+const createAdmin = async (req, res) => {
+  try{
+    let {
+      sid,
+      password,
+      accountType,
+      department,
+      email,
+    } = req.body;
+    
+    console.log(req.body)
+    if (
+      !department ||
+      !email ||
+      !sid ||
+      !password ||
+      !accountType
+    ) {
+      return res.json({
+        success: false,
+        msg: "Fill All the Fields",
+      });
+    }
+    sid = sid.toLowerCase();
+    const userPresent = await userModel.findOne({ sid: sid });
+  
+    if (userPresent) {
+      return res.json({
+        success: false,
+        msg: "User Alredy Exist",
+      });
+    }
+
+    const hasedPassword = await bcrypt.hash(password, 10);
+  
+    const registredUser = await userModel.create({
+      department,
+      email,
+      sid,
+      password: hasedPassword,
+      role: accountType
+    });
+  
+    return res.json({
+      success: true,
+      msg: "User Registred",
+    });
+
+  }catch(error){
+
+    console.log(error);
+    return res.json({
+      success: false,
+      message: "Signup Failure, please try again",
+    });
+    
+  }
+};
+
+module.exports = { signUp, login, sendOTP,updateUser  ,createAdmin };

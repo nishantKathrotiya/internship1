@@ -35,7 +35,7 @@ const AdminDashboard = () => {
         <>
           <div className="outerContainer-cards">
             <div className="tiles-container">
-              <MeteorDemo name={"Admin"} />
+              <MeteorDemo name={"committee"} />
               <GridPatternDemo title={"Total Application"} count={25} />
               <GridPatternDemo title={"Approved Application"} count={10} />
               <GridPatternDemo title={"Rejected Application"} count={12} />

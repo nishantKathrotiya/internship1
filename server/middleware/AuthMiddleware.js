@@ -90,3 +90,21 @@ exports.isHod = async (req,res,next) => {
     });
   }
 }
+
+exports.isCommittee = async (req,res,next) => {
+  try {
+    if (req.user.role !== "committee") {
+      return res.send({
+        success: false,
+        message: "You are not admin",
+      });
+    }
+    console.log("Passed Is admin")
+    next();
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: "error while Verifying admin",
+    });
+  }
+}

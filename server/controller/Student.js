@@ -35,17 +35,17 @@ const newApplication = async (req, res) => {
     } = req.body;
 
     var departmentInvolved =[];
-    departmentInvolved.push(department);
+    departmentInvolved.push(`${institute[0]}${department}`);
   
     JSON.parse(coAuthors).forEach((student)=>{
-      if(departmentInvolved.indexOf(student.studentDepartment)==-1){
-        departmentInvolved.push(student.studentDepartment)
+      if(departmentInvolved.indexOf(`${student.studentInstitute[0]}${student.studentDepartment}`)==-1){
+        departmentInvolved.push(`${student.studentInstitute[0]}${student.studentDepartment}`)
       }
     });
 
     JSON.parse(facultyCoAuthors).forEach((faculty)=>{
-      if(departmentInvolved.indexOf(faculty.facultyCoAuthorDepartment)==-1){
-        departmentInvolved.push(faculty.facultyCoAuthorDepartment)
+      if(departmentInvolved.indexOf(`${faculty.facultyInstitute[0]}${faculty.facultyCoAuthorDepartment}`)==-1){
+        departmentInvolved.push(`${faculty.facultyInstitute[0]}${faculty.facultyCoAuthorDepartment}`)
       }
     });
 

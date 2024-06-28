@@ -167,7 +167,7 @@ const applicationSchema = new mongoose.Schema({
   departmentInvolved: [
     {
       type: String,
-      enum: ["IT", "CE", "CS"],
+      enum: ["DIT", "DCE", "DCS","CIT", "CCE", "CCS","ADM"],
     },
   ],
   createdAt: {

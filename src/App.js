@@ -7,6 +7,7 @@ import OpenRoute from "./components/OpenRoute";
 import useAuthCheck from "./components/AuthToken.jsx";
 import StudentRoute from "./components/StudentRoute.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
+import Committee from "./components/Committee.jsx";
 
 
 import Login from "./pages/Login.jsx";
@@ -43,8 +44,8 @@ function App() {
         <Route path="/verify-email" element={<OpenRoute> <SendOtp /> </OpenRoute>} />
         <Route path="/download" element={<OpenRoute> <Download /> </OpenRoute>} />
 
-        <Route path={"/admin"} element={<AdminRoute><Admin /></AdminRoute>} >
-          <Route path={"/admin"} element={<AdminDashboard />} />
+        <Route path={"/committee"} element={<Committee><Admin /></Committee>} >
+          <Route path={"/committee"} element={<AdminDashboard />} />
         </Route>
 
         <Route path={"/hod"} element={<HodRoute><Admin /></HodRoute>} >
