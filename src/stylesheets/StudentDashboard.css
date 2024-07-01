@@ -414,3 +414,19 @@ body {
   width: 25px;
 }
 
+@media (max-width:760px) {
+
+  .outerContainer-cards{
+    display: none;
+  }
+  .dataTable-container{
+    height: 85cls
+    vh;
+    overflow: hidden;
+    padding-bottom: 5px;
+    margin: 0;
+  }
+  .DataTable-parant-Container{
+    height: 100%;
+  }
+}

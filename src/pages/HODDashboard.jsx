@@ -12,11 +12,12 @@ import useOnClickOutside from "../customHooks/useOnClickOutside";
 const HODDashboard = () => {
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [countData, setCountData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const ref = useRef(null);
 
     const getData = () => {
-        hodDashboard(setUserData, setLoading);
+        hodDashboard(setUserData,setCountData, setLoading);
     }
 
     // Getting details as soon as page is loaded
@@ -36,10 +37,10 @@ const HODDashboard = () => {
                     <div className="outerContainer-cards">
                         <div className="tiles-container">
                             <MeteorDemo name={"H.O.D"} />
-                            <GridPatternDemo title={"Your Application"} count={25} />
-                            <GridPatternDemo title={"Approved Application"} count={10} />
-                            <GridPatternDemo title={"Rejected Application"} count={12} />
-                            <GridPatternDemo title={"Returned Application"} count={3} />
+                            <GridPatternDemo title={"Total Application"} count={countData.totalCount} />
+                            <GridPatternDemo title={"Approved Application"} count={countData.approved} />
+                            <GridPatternDemo title={"Rejected Application"} count={countData.rejected} />
+                            <GridPatternDemo title={"Returned Application"} count={countData.returned} />
                         </div>
 
                     </div>
@@ -48,7 +49,7 @@ const HODDashboard = () => {
                         <h1>Data Not Found</h1>
                     ) : (
                         <div className="dataTable-container">
-                            <DataTable userData={userData} id={"admin"} setOpen={setOpen} />
+                            <DataTable userData={userData} id={"hod"} setOpen={setOpen} />
                         </div>
                     )}
                 </>

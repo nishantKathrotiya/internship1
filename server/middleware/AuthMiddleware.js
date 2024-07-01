@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../model/userDetails");
+const applicationModal = require("../model/appllication")
 require("dotenv").config();
 
 exports.isLoggedin = async (req, res ,next) => {

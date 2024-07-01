@@ -1,5 +1,20 @@
 const mongoose = require("mongoose");
 
+
+const CommitteeSchema = new mongoose.Schema({
+  status: {
+    type: String,
+    default: '',
+    enum: ["pending", "inprogress", "approved", "rejected", "returned"]
+  },
+  msg: {
+    type: String,
+    default: ''
+  }
+}, { _id: false });
+
+
+
 const applicationSchema = new mongoose.Schema({
   fname: {
     type: String,
@@ -162,6 +177,21 @@ const applicationSchema = new mongoose.Schema({
         default: null,
       },
     }),
+  },
+
+  committeeStatus: {
+    committee1: {
+      type: CommitteeSchema,
+      default: { status: 'inprogress', msg: '' }
+    },
+    committee2: {
+      type: CommitteeSchema,
+      default: { status: 'inprogress', msg: '' }
+    },
+    committee3: {
+      type: CommitteeSchema,
+      default: { status: 'inprogress', msg: '' }
+    }
   },
 
   departmentInvolved: [

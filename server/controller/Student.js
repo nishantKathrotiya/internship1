@@ -99,12 +99,9 @@ const newApplication = async (req, res) => {
     },{new:true});
 
     const html = generateHTML(response)
-
     let options = { format: "A4" };
-
     const pdfBuffer = await html_to_pdf.generatePdf({ content: html }, options);
 
-    // Ensure directory exists for user files
     const userId = String(req.user._id);
     const filePath = path.join(__dirname, "../Files", userId);
 
@@ -113,8 +110,6 @@ const newApplication = async (req, res) => {
     }
 
     const pdfFileName = `${response._id}.pdf`;
-
-    // Write PDF to file system
     fs.writeFileSync(path.join(filePath, pdfFileName), pdfBuffer);
 
     //Sending the response
@@ -160,5 +155,196 @@ const dashboard = async (req, res) => {
   }
 };
 
+const editInitialData = async (req, res) => {
+  try {
+    const {applicationID} = req.query;
 
-module.exports = { newApplication, dashboard };
+    if (!applicationID) {
+      return res.json({
+        success: false,
+        message: "ApplicationID Not Found",
+      });
+    }
+
+    const options = {
+      hodStatus: 0,
+      status: 0,
+      committeeStatus: 0,
+      departmentInvolved: 0,
+      _id: 0,
+      studentDBID:0,
+      createdAt: 0,
+      conferenceAcceptance: 0,
+      regFeesProof: 0,
+      indexingProof: 0,
+      __v: 0,
+    };
+    const applications = await applicationModal.findById({ _id: applicationID},options);
+
+    res.send({
+      success: true,
+      applications,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: "SomeThing Went Wrong",
+    });
+  }
+};
+
+const updateApplication = async (req, res) => {
+  try {
+
+    const {applicationID} = req.body;
+    const {
+      fname,
+      mname,
+      lname,
+      studentID,
+      mobileNumber,
+      department,
+      pgUg,
+      institute,
+      attendance,
+      paperTitle,
+      publisherDetail,
+      conferenceName,
+      conferenceWebsite,
+      regFees,
+      indexing,
+      firstAuthor,
+      authorFullName,
+      authorRollNo,
+      facultyCoAuthors,
+      coAuthors,
+    } = req.body.formData;
+
+    if (!applicationID) {
+      return res.json({
+        success: false,
+        message: "ApplicationID Not Found",
+      });
+    }
+    var departmentInvolved =[];
+    departmentInvolved.push(`${institute[0]}${department}`);
+  
+    coAuthors.forEach((student)=>{
+      if(departmentInvolved.indexOf(`${student.studentInstitute[0]}${student.studentDepartment}`)==-1){
+        departmentInvolved.push(`${student.studentInstitute[0]}${student.studentDepartment}`)
+      }
+    });
+
+    facultyCoAuthors.forEach((faculty)=>{
+      if(departmentInvolved.indexOf(`${faculty.facultyInstitute[0]}${faculty.facultyCoAuthorDepartment}`)==-1){
+        departmentInvolved.push(`${faculty.facultyInstitute[0]}${faculty.facultyCoAuthorDepartment}`)
+      }
+    });
+
+    var hodStatus = {};
+     departmentInvolved.forEach((department)=> {
+      hodStatus[`${department}`] = {
+        status:'pending',
+        nsg:null
+      }
+    } );
+
+    
+   
+    const response = await applicationModal.findByIdAndUpdate({_id:applicationID},{
+      fname,
+      mname,
+      lname,
+      studentID,
+      mobileNumber,
+      department,
+      pgUg,
+      institute,
+      attendance,
+      coAuthors ,
+      paperTitle,
+      publisherDetail,
+      conferenceName,
+      conferenceWebsite,
+      regFees,
+      indexing,
+      firstAuthor,
+      authorFullName: firstAuthor == "Yes" ? null : authorRollNo,
+      authorRollNo: firstAuthor == "Yes" ? null : authorFullName,
+      facultyCoAuthors,
+      status: {
+        status: "pending",
+        msg: null,
+      },
+      departmentInvolved,
+      hodStatus,
+      committeeStatus: {
+        committee1: {
+          status: 'inprogress', msg: '' ,
+        },
+        committee2: {
+          status: 'inprogress', msg: '' ,
+        },
+        committee3: {
+          status: 'inprogress', msg: '' ,
+        }
+      },
+    });
+
+    
+
+    const html = generateHTML(response)
+    let options = { format: "A4" };
+    const pdfBuffer = await html_to_pdf.generatePdf({ content: html }, options);
+
+    const userId = String(req.user._id);
+    const filePath = path.join(__dirname, "../Files", userId);
+
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(filePath);
+    }
+
+    const pdfFileName = `${response._id}.pdf`;
+    fs.writeFileSync(path.join(filePath, pdfFileName), pdfBuffer);
+
+    return res.send({
+      success: true,
+      msg:"Updated",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      message: "SomeThing Went Wrong",
+    });
+  }
+};
+
+const deleteApplication = async (req, res) => {
+  try {
+    const {applicationID} = req.query;
+
+    if (!applicationID) {
+      return res.json({
+        success: false,
+        message: "ApplicationID Not Found",
+      });
+    }
+
+    const applications = await applicationModal.findByIdAndDelete({ _id: applicationID});
+
+    res.send({
+      success: true,
+      msg:"deleted",
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: "SomeThing Went Wrong",
+    });
+  }
+};
+
+module.exports = { newApplication, dashboard , editInitialData ,updateApplication, deleteApplication};

@@ -15,6 +15,7 @@ import Signup from "./pages/Signup.jsx";
 import SendOtp from "./pages/SendOtp.jsx";
 
 import Form from "./pages/Form.jsx";
+import EditApplication from "./pages/EditApplication.jsx";
 import Home from "./pages/Home.jsx";
 import Student from "./pages/Student.jsx";
 import Admin from "./pages/Admin.jsx";
@@ -55,6 +56,7 @@ function App() {
         <Route path="/student" element={<StudentRoute> <Student /> </StudentRoute>} >
           <Route path="/student" element={<StudentDashboard />} />
           <Route path="/student/application" element={<Form />} />
+          <Route path="/student/:applicationID/formedit" element={<EditApplication />} />
         </Route>
 
         

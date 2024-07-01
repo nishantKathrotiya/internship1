@@ -12,11 +12,12 @@ import useOnClickOutside from "../customHooks/useOnClickOutside";
 const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [countData, setCountData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const ref = useRef(null);
 
   const getData = ()=>{
-    adminDashboard(setUserData, setLoading);
+    adminDashboard(setUserData,setCountData,setLoading);
   }
 
   // Getting details as soon as page is loaded
@@ -34,18 +35,30 @@ const AdminDashboard = () => {
       ) : (
         <>
           <div className="outerContainer-cards">
-            <div className="tiles-container">
-              <MeteorDemo name={"committee"} />
-              <GridPatternDemo title={"Total Application"} count={25} />
-              <GridPatternDemo title={"Approved Application"} count={10} />
-              <GridPatternDemo title={"Rejected Application"} count={12} />
-              <GridPatternDemo title={"Returned Application"} count={3} />
-            </div>
+              {
+                (countData == null) ? (<>
+                  <div className="tiles-container">
+                    <MeteorDemo name={"committee"} />
+                    <GridPatternDemo title={"Total Application"} count={'-'} />
+                    <GridPatternDemo title={"Approved Application"} count={'-'} />
+                    <GridPatternDemo title={"Rejected Application"} count={"-"} />
+                    <GridPatternDemo title={"Returned Application"} count={"-"} />
+                  </div>
+                </>) : (<>
+                  <div className="tiles-container">
+                    <MeteorDemo name={"committee"} />
+                    <GridPatternDemo title={"Total Application"} count={countData.totalCount} />
+                    <GridPatternDemo title={"Approved Application"} count={countData.approved} />
+                    <GridPatternDemo title={"Rejected Application"} count={countData.rejected} />
+                    <GridPatternDemo title={"Returned Application"} count={countData.returned} />
+                  </div>
+                </>)
+              }
             
           </div>
 
-          {userData == null ? (
-            <h1>Data Not Found</h1>
+          {(userData == null || userData.length==0) ? (
+              <h1>Data Not Found</h1>
           ) : (
             <div className="dataTable-container">
               <DataTable userData={userData} id={"admin"} setOpen={setOpen} />

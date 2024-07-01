@@ -2,7 +2,6 @@ import { toast } from "react-toastify";
 import { apiConnector } from "../connector";
 import { b64toBlob } from "../helper";
 
-
 export async function newApplication(formData, setLoading, navigate) {
   const formDataToSend = new FormData();
 
@@ -51,9 +50,6 @@ export async function newApplication(formData, setLoading, navigate) {
   toast.dismiss(toastId);
 }
 
-
-
-
 export async function dashboardDetails(setUserData , setLoading){
 
   const toastId = toast.loading("Loading...");
@@ -79,4 +75,70 @@ export async function dashboardDetails(setUserData , setLoading){
 
   setLoading(false);
   toast.dismiss(toastId);
+}
+
+export async function initialData(applicationID, setFormData , setLoading , navigate){
+
+  setLoading(true);
+
+  try {
+    const response = await apiConnector(
+      "GET",
+      `http://localhost:4000/student/initalData?applicationID=${applicationID}`,
+    );
+
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    setFormData(response.data.applications)
+    toast.success("Data Found");
+
+  } catch (error) {
+    navigate("/student");
+    toast.error(error.message);
+  }
+  setLoading(false);
+}
+
+export async function updateApplication(formData,applicationID, setLoading, navigate){
+
+  setLoading(true);
+
+  try {
+    const response = await apiConnector(
+      "POST",
+      `http://localhost:4000/student/update?applicationID=${applicationID}`,
+      {formData , applicationID}
+    );
+
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+
+    navigate("/student");
+    toast.success("Application Updated");
+
+  } catch (error) {
+    toast.error(error.message);
+  }
+  setLoading(false);
+}
+
+export async function deleteApplication(applicationID){
+  try {
+    const response = await apiConnector(
+      "DELETE",
+      `http://localhost:4000/student/delete?applicationID=${applicationID}`,
+    );
+
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+
+    toast.success("Deleted");
+
+  } catch (error) {
+    toast.error(error.message);
+  }
+
 }

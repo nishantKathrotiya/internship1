@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { apiConnector } from "../connector";
 import { setNull } from "../../slices/application";
 
-export async function hodDashboard(setUserData , setLoading){
+export async function hodDashboard(setUserData,setCountData,setLoading){
 
   const toastId = toast.loading("Loading...");
   setLoading(true);
@@ -16,7 +16,9 @@ export async function hodDashboard(setUserData , setLoading){
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
-    setUserData(response.data.applications)
+    setUserData(response.data.applications);
+    setCountData(response.data.counts);
+    
     toast.success("Data Found");
 
   } catch (error) {

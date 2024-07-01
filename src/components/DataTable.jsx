@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineFilterAltOff } from "react-icons/md";
 import AdminDataView from "./AdminDataView";
 import Dataview from "./Dataview";
+import HodDataView from "./HodDataView";
 import Filter from './Filter';
 import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
 
@@ -192,7 +193,11 @@ const DataTable = ({ userData, id, setOpen }) => {
                     <div className="row-content" key={data._id}>
 
                         {
-                            id == 'student' ? (<Dataview data={data} index={index} />) : (<AdminDataView data={data} index={index} setOpen={setOpen} />)
+                            id == 'student' ? (<Dataview data={data} index={index} />) : (
+                                
+                                    id == "admin" ? ( <AdminDataView data={data} index={index} setOpen={setOpen} />) : (<HodDataView data={data} index={index} setOpen={setOpen} />)
+                                
+                            )
                         }
                     </div>
                 ))}

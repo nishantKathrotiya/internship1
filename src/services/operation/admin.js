@@ -3,7 +3,7 @@ import { apiConnector } from "../connector";
 import { setNull } from "../../slices/application";
 
 
-export async function adminDashboard(setUserData , setLoading){
+export async function adminDashboard(setUserData,setCountData,setLoading){
 
   const toastId = toast.loading("Loading...");
   setLoading(true);
@@ -17,7 +17,8 @@ export async function adminDashboard(setUserData , setLoading){
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
-    setUserData(response.data.applications)
+    setUserData(response.data.applications);
+    setCountData(response.data.counts)
     toast.success("Data Found");
 
   } catch (error) {
@@ -30,9 +31,6 @@ export async function adminDashboard(setUserData , setLoading){
   toast.dismiss(toastId);
 }
 
-
-
-
 export function updateStatus(applicationID, action, msg , getData) {
     return async (dispatch) => { // Return a function that accepts `dispatch`
       const toastId = toast.loading("Loading...");
@@ -40,7 +38,7 @@ export function updateStatus(applicationID, action, msg , getData) {
       try {
         const response = await apiConnector(
           "POST",
-          "http://localhost:4000/student/update",
+          "http://localhost:4000/admin/update",
           { applicationID, action, msg }
         );
   
