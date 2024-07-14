@@ -137,14 +137,25 @@ const dashboard = async (req, res) => {
 
     //passing all the application ids to find all the application
     //but only the few details like [name , date and status]
-    const applications = await applicationModal.find(
-      { _id: { $in: ids } },
-      { paperTitle: 1, createdAt: 1, status: 1 }
-    );
 
-    res.send({
+
+    const [applications,totalCount, approved , rejected , returned] = await Promise.all([
+      applicationModal.find({ _id: { $in: ids } },{ paperTitle: 1, createdAt: 1, status: 1 } ),
+      applicationModal.countDocuments(),
+      applicationModal.countDocuments({"status.status": "approved"}),
+      applicationModal.countDocuments({"status.status": "rejected"}), 
+      applicationModal.countDocuments({"status.status": "returned"}),
+  ]);
+
+    return res.send({
       success: true,
       applications,
+      counts:{
+        totalCount:applications.length,
+        approved,
+        rejected,
+        returned,
+      }
     });
   } catch (error) {
     console.log(error);
@@ -321,6 +332,83 @@ const updateApplication = async (req, res) => {
   }
 };
 
+const editFile = async (req, res) => {
+  try {
+   const {applicationID} = req.query;
+
+    if (!applicationID) {
+      return res.json({
+        success: false,
+        message: "ApplicationID Not Found",
+      });
+    }
+
+    const options ={
+      status: 1,
+      hodStatus: 1,
+      studentDBID:1,
+      regFeesProof: 1,
+      indexingProof: 1,
+      committeeStatus: 1,
+      departmentInvolved:1,
+      conferenceAcceptance: 1,
+  };
+  const applications = await applicationModal.findById({ _id: applicationID},options);
+
+  var upadtedHodStatus = {};
+  applications.departmentInvolved.forEach((department)=> {
+    upadtedHodStatus[`${department}`] = {
+    status:'pending',
+     msg:null
+   }
+ } );
+
+        const userId = String(applications.studentDBID);
+        
+        const filePath1 = path.join(__dirname, "../Files", userId,applications.regFeesProof);
+        const filePath2 = path.join(__dirname, "../Files", userId,applications.indexingProof);
+        const filePath3 = path.join(__dirname, "../Files", userId,applications.conferenceAcceptance);
+
+        try{
+          fs.unlinkSync(filePath1);
+          fs.unlinkSync(filePath2);
+          fs.unlinkSync(filePath3);
+        }catch(err){
+          console.log("Went Wrong While File Delete")
+        }
+
+    applications. regFeesProof = req.files.regFeesProof[0].filename;
+    applications. indexingProof = req.files.indexingProof[0].filename;
+    applications. conferenceAcceptance = req.files.conferenceAcceptance[0].filename;
+    applications.hodStatus = upadtedHodStatus;
+    applications. committeeStatus =  {
+          committee1: {
+            status: 'inprogress', msg: '' ,
+          },
+          committee2: {
+            status: 'inprogress', msg: '' ,
+          },
+          committee3: {
+            status: 'inprogress', msg: '' ,
+          }
+    },
+    applications.save();
+
+    //Sending the response
+    res.json({
+      success: true,
+      message: "Application Submitted",
+    });
+
+  } catch (err) {
+    console.log(err)
+    res.json({
+      success: false,
+      message: "SomeThing Went Wrong",
+    });
+  }
+};
+
 const deleteApplication = async (req, res) => {
   try {
     const {applicationID} = req.query;
@@ -347,4 +435,4 @@ const deleteApplication = async (req, res) => {
   }
 };
 
-module.exports = { newApplication, dashboard , editInitialData ,updateApplication, deleteApplication};
+module.exports = { newApplication,dashboard,editInitialData,updateApplication,editFile,deleteApplication};

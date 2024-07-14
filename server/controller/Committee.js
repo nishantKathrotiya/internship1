@@ -12,12 +12,12 @@ const dashboard = async (req, res) => {
     //Coollecting all application
     //but only the few details like [name , date and status]
 
-    const [applications,totalCount, approved , rejected , closed] = await Promise.all([
-      applicationModal.find( { "status.status": { $in: ["closed", "approved"] } } , { paperTitle: 1, createdAt: 1, status: 1, committeeStatus:1 } ),
+    const [applications,totalCount, approved , rejected , returned] = await Promise.all([
+      applicationModal.find( { "status.status": { $in: ["inprogress", "approved"] } } , { paperTitle: 1, createdAt: 1, status: 1, committeeStatus:1 } ),
       applicationModal.countDocuments(),
       applicationModal.countDocuments({"status.status": "approved"}),
       applicationModal.countDocuments({"status.status": "rejected"}), 
-      applicationModal.countDocuments({"status.status": "closed"}),
+      applicationModal.countDocuments({"status.status": "returned"}),
   ]);
 
     return res.send({
@@ -27,7 +27,7 @@ const dashboard = async (req, res) => {
         totalCount,
         approved,
         rejected,
-        closed,
+        returned,
       }
     });
 
@@ -42,7 +42,7 @@ const dashboard = async (req, res) => {
 
 const updateStatus = async (req, res) => {
   try {
-    const { applicationID, action } = req.body;
+    const { applicationID, action, msg } = req.body;
 
     if (!applicationID || !action) {
       return res.json({
@@ -60,22 +60,48 @@ const updateStatus = async (req, res) => {
       });
     }
 
-    if ((application.status.status=="inprogress") || (application.status=="pending")) {
+    if (application.status=="inprogress") {
       return res.json({
         success: false,
-        message: "Still Verification Pending",
+        message: "Still Verification at HOD level Pending",
       });
     }
     
-    if (application.status.status=="closed") {
+    if (application.status.status=="approved") {
       return res.json({
         success: false,
         message: "You Cant Do anything once it approved",
       });
     }
 
-    application.status.status = action;
-    hodClose(application)
+    if (application.committeeStatus[req.user.sid].status=="approved") {
+      return res.json({
+        success: false,
+        message: "Sorry you alredy approved",
+      });
+    }
+    
+    application.committeeStatus[req.user.sid].status = action;
+    application.committeeStatus[req.user.sid].msg = msg;
+
+ 
+    const overallStatus = determineOverallStatus(application);
+
+    if (overallStatus) {
+      application.status.status = overallStatus;
+      application.status.msg = msg;
+    } else {
+      return res.json({
+        success: false,
+        message: "Something wrong with status determination",
+      });
+    }
+
+    if(!(action=='approved')){
+      for (const [department, hodStatusObj] of application.hodStatus) {
+        hodStatusObj.status = action
+      }
+    }
 
     await application.save();
 
@@ -93,9 +119,26 @@ const updateStatus = async (req, res) => {
   }
 };
 
-const hodClose = (application) => {
+const determineOverallStatus = (application) => {
+  const statuses = Object.values(application.committeeStatus).map(cs => cs.status);
   
-  console.log(Object.keys(application.hodStatus))
+  if (statuses.includes("rejected")) {
+    return "rejected";
+  }
+  
+  if (statuses.includes("returned")) {
+    return "returned";
+  }
+
+  if (statuses.includes("inprogress")) {
+    return "inprogress";
+  }
+
+  if (statuses.every(status => status == "approved")) {
+    return "approved";
+  }
+
+  return null;
 };
 
 module.exports = { dashboard, updateStatus };

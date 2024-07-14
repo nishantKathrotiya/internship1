@@ -4,9 +4,7 @@ import { viewApplication, downloadFile } from "../services/operation/common";
 
 
 import "../stylesheets/Profile.css"
-
 import useOnClickOutside from "../customHooks/useOnClickOutside"
-
 
 
 const Menu = ({ applicationID, data, icon }) => {

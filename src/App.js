@@ -16,24 +16,23 @@ import SendOtp from "./pages/SendOtp.jsx";
 
 import Form from "./pages/Form.jsx";
 import EditApplication from "./pages/EditApplication.jsx";
+import EditFile from "./pages/EditFile.jsx"
 import Home from "./pages/Home.jsx";
 import Student from "./pages/Student.jsx";
 import Admin from "./pages/Admin.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
-import AdminDashboard from "./pages/AdminDashboard.jsx";
+import CommiteDashbord from "./pages/CommiteDashbord.jsx";
 import HODDashboard from "./pages/HODDashboard.jsx";
 import Download from "./pages/Download.jsx";
 import HodRoute from "./components/HodRoute.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 
 function App() {
   useAuthCheck();
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.profile);
 
-  if (token === null) {
-    console.log("Printing Token", token);
-    dispatch(logout);
-  }
+
 
   return (
     <>
@@ -46,17 +45,22 @@ function App() {
         <Route path="/download" element={<OpenRoute> <Download /> </OpenRoute>} />
 
         <Route path={"/committee"} element={<Committee><Admin /></Committee>} >
-          <Route path={"/committee"} element={<AdminDashboard />} />
+          <Route path={"/committee"} element={<CommiteDashbord />} />
         </Route>
 
         <Route path={"/hod"} element={<HodRoute><Admin /></HodRoute>} >
           <Route path={"/hod"} element={<HODDashboard />} />
         </Route>
 
+        <Route path={"/admin"} element={<AdminRoute><Admin /></AdminRoute>} >
+          <Route path={"/admin"} element={<AdminDashboard />} />
+        </Route>
+
         <Route path="/student" element={<StudentRoute> <Student /> </StudentRoute>} >
           <Route path="/student" element={<StudentDashboard />} />
           <Route path="/student/application" element={<Form />} />
           <Route path="/student/:applicationID/formedit" element={<EditApplication />} />
+          <Route path="/student/:applicationID/fileedit" element={<EditFile />} />
         </Route>
 
         

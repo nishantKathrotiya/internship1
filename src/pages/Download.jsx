@@ -7,6 +7,7 @@ const Download = () => {
         const response = await fetch("http://localhost:4000/student/downloaddocument", {
           method: "GET",
           responseType: "blob",
+          credentials: 'include',
         });
         console.log(response);
         if (!response.ok) {

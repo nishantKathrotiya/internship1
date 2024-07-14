@@ -20,7 +20,6 @@ const signUp = async (req, res) => {
       accountType,
     } = req.body;
     
-    console.log(req.body)
     if (
       !firstName||
       !lastName ||
@@ -52,7 +51,7 @@ const signUp = async (req, res) => {
   
   
     if (findOtp[0].otp !== otp) {
-      console.log(otp);
+
       return res.json({
         success: false,
         msg: "OTP Does not match",
@@ -123,6 +122,7 @@ const login = async (req, res) => {
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: false,
+        sameSite: 'None',
       };
       res.cookie("token", token, options);
       return res.status(200).json({
@@ -232,7 +232,7 @@ const createAdmin = async (req, res) => {
       email,
     } = req.body;
     
-    console.log(req.body)
+
     if (
       !department ||
       !email ||

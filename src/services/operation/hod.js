@@ -18,8 +18,6 @@ export async function hodDashboard(setUserData,setCountData,setLoading){
     }
     setUserData(response.data.applications);
     setCountData(response.data.counts);
-    
-    toast.success("Data Found");
 
   } catch (error) {
 

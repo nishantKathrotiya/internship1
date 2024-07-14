@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { apiConnector } from "../connector";
 import { b64toBlob } from "../helper";
+import {student} from '../api'
 
 export async function newApplication(formData, setLoading, navigate) {
   const formDataToSend = new FormData();
@@ -29,7 +30,7 @@ export async function newApplication(formData, setLoading, navigate) {
   try {
     const response = await apiConnector(
       "POST",
-      "http://localhost:4000/student/application",
+      student.APPLICATION,
       formDataToSend,
       {
         headers: {
@@ -41,16 +42,15 @@ export async function newApplication(formData, setLoading, navigate) {
       throw new Error(response.data.message);
     }
     toast.success("Application Registred");
-    // navigate("/student");
+    navigate("/student");
   } catch (error) {
-    console.log("Application Register API ERROR............", error);
     toast.error(error.message);
   }
   setLoading(false);
   toast.dismiss(toastId);
 }
 
-export async function dashboardDetails(setUserData , setLoading){
+export async function dashboardDetails(setUserData,setCountData,setLoading){
 
   const toastId = toast.loading("Loading...");
   setLoading(true);
@@ -58,14 +58,14 @@ export async function dashboardDetails(setUserData , setLoading){
   try {
     const response = await apiConnector(
       "GET",
-      "http://localhost:4000/student/dashboard",
+      student.DASHBOARD,
     );
 
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
-    setUserData(response.data.applications)
-    toast.success("Data Found");
+    setUserData(response.data.applications);
+    setCountData(response.data.counts)
 
   } catch (error) {
 
@@ -84,15 +84,13 @@ export async function initialData(applicationID, setFormData , setLoading , navi
   try {
     const response = await apiConnector(
       "GET",
-      `http://localhost:4000/student/initalData?applicationID=${applicationID}`,
+      student.INITIAL_DATA+`?applicationID=${applicationID}`,
     );
 
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     setFormData(response.data.applications)
-    toast.success("Data Found");
-
   } catch (error) {
     navigate("/student");
     toast.error(error.message);
@@ -107,7 +105,7 @@ export async function updateApplication(formData,applicationID, setLoading, navi
   try {
     const response = await apiConnector(
       "POST",
-      `http://localhost:4000/student/update?applicationID=${applicationID}`,
+      student.UPDATE+`?applicationID=${applicationID}`,
       {formData , applicationID}
     );
 
@@ -124,11 +122,44 @@ export async function updateApplication(formData,applicationID, setLoading, navi
   setLoading(false);
 }
 
+export async function fileEdit(formData,applicationID,setLoading,navigate) {
+  const formDataToSend = new FormData();
+
+  // Append other fields to FormData
+  Object.entries(formData).forEach(([key, value]) => {
+      formDataToSend.append(key, value);
+  });
+
+  const toastId = toast.loading("Loading...");
+  setLoading(true);
+
+  try {
+    const response = await apiConnector(
+      "POST",
+      student.FIEL_UPDATE+`?applicationID=${applicationID}`,
+      formDataToSend,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+      navigate("/student");
+  } catch (error) {
+    toast.error(error.message);
+  }
+  setLoading(false);
+  toast.dismiss(toastId);
+}
+
 export async function deleteApplication(applicationID){
   try {
     const response = await apiConnector(
       "DELETE",
-      `http://localhost:4000/student/delete?applicationID=${applicationID}`,
+      student.DELETE+`?applicationID=${applicationID}`,
     );
 
     if (!response.data.success) {

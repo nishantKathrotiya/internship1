@@ -6,13 +6,16 @@ import MeteorDemo from "../components/Meteors";
 
 import { dashboardDetails, downloadPDF } from "../services/operation/student";
 import GridPatternDemo from "../components/GridCard";
+import { useSelector } from "react-redux";
 
 const StudentDashboard = () => {
 
   const [userData, setUserData] = useState(null);
+  const [countData , setCountData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const {user} = useSelector((state)=>state.profile)
   const getData = ()=>{
-    dashboardDetails(setUserData, setLoading);
+    dashboardDetails(setUserData,setCountData, setLoading);
   }
 
   // Getting details as soon as page is loded
@@ -26,13 +29,25 @@ const StudentDashboard = () => {
         loading ? (<h1>Loading...</h1>) : (
           <>
             <div className="outerContainer-cards">
-              <div className="tiles-container">
-                <MeteorDemo name={"22DIT022"}/>
-                <GridPatternDemo title={"Your Application"} count={25} />
-                <GridPatternDemo title={"Approved Application"} count={10} />
-                <GridPatternDemo title={"Rejected Application"} count={12} />
-                <GridPatternDemo title={"Returned Application"} count={3} />
-              </div>
+            {
+                (countData == null) ? (<>
+                  <div className="tiles-container">
+                    <MeteorDemo name={user.sid} />
+                    <GridPatternDemo title={"Total Application"} count={'-'} />
+                    <GridPatternDemo title={"Approved Application"} count={'-'} />
+                    <GridPatternDemo title={"Rejected Application"} count={"-"} />
+                    <GridPatternDemo title={"Returned Application"} count={"-"} />
+                  </div>
+                </>) : (<>
+                  <div className="tiles-container">
+                    <MeteorDemo name={user.sid} />
+                    <GridPatternDemo title={"Total Application"} count={countData.totalCount} />
+                    <GridPatternDemo title={"Approved Application"} count={countData.approved} />
+                    <GridPatternDemo title={"Rejected Application"} count={countData.rejected} />
+                    <GridPatternDemo title={"Returned Application"} count={countData.returned} />
+                  </div>
+                </>)
+              }
               <div className="newApplication-conatainer">
                 <Link to="/student/application" className="newApplicationBTN">New Application</Link>
               </div>

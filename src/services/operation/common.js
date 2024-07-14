@@ -30,13 +30,11 @@ export async function viewApplication(applicationID) {
       console.error("Error downloading the file:", error);
       toast.error("Error downloading the file");
     }
-  }
-  
+}
 
   export async function downloadFile(applicationID , title) {
     try {
-      console.log(title)
-      const response = await apiConnector('GET', `http://localhost:4000/student/download?id=666da01492e43560585d1fb4&title=${title}`);
+      const response = await apiConnector('GET', `http://localhost:4000/student/download?id=${applicationID}&title=${title}`);
   
       if (!response.data.success) {
         throw new Error("Network response was not ok");
@@ -62,5 +60,4 @@ export async function viewApplication(applicationID) {
       console.error("Error downloading the file:", error);
       toast.error("Error downloading the file");
     }
-  }
-  
+}

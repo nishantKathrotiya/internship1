@@ -3,7 +3,7 @@ import { apiConnector } from "../connector";
 import { setNull } from "../../slices/application";
 
 
-export async function adminDashboard(setUserData,setCountData,setLoading){
+export async function committeeDashboard(setUserData,setCountData,setLoading){
 
   const toastId = toast.loading("Loading...");
   setLoading(true);
@@ -11,7 +11,7 @@ export async function adminDashboard(setUserData,setCountData,setLoading){
   try {
     const response = await apiConnector(
       "GET",
-      "http://localhost:4000/admin/dashboard",
+      "http://localhost:4000/committee/dashboard",
     );
 
     if (!response.data.success) {
@@ -30,20 +30,21 @@ export async function adminDashboard(setUserData,setCountData,setLoading){
   toast.dismiss(toastId);
 }
 
-export function updateStatus(applicationID, action,getData) {
+export function updateStatus(applicationID, action, msg , getData) {
     return async (dispatch) => { // Return a function that accepts `dispatch`
       const toastId = toast.loading("Loading...");
   
       try {
         const response = await apiConnector(
           "POST",
-          "http://localhost:4000/admin/update",
-          { applicationID, action }
+          "http://localhost:4000/committee/update",
+          { applicationID, action, msg }
         );
   
         if (!response.data.success) {
           throw new Error(response.data.message);
         }
+  
         toast.success("Updated");
         getData();
         dispatch(setNull()); 

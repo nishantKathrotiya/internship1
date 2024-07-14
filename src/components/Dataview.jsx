@@ -20,7 +20,7 @@ const Dataview = ({ data, index }) => {
             },
             {
                 name: "File",
-                function: () => navigate("/file"),
+                function: (applicationID) => navigate(`/student/${applicationID}/fileedit`),
             }
         ],
         editIcon : <CiEdit className="icon iconMedium" />,

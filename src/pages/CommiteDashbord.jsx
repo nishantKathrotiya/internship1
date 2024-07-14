@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import DataTable from "../components/DataTable";
 import MeteorDemo from "../components/Meteors";
-import ClosePopup from "../components/ClosePopup";
+import PopUp from "../components/PopUp";
 
 import "../stylesheets/StudentDashboard.css";
 
-import { adminDashboard } from "../services/operation/admin";
+import { committeeDashboard } from "../services/operation/committee";
 import GridPatternDemo from "../components/GridCard";
 import useOnClickOutside from "../customHooks/useOnClickOutside";
+import { useSelector } from "react-redux";
 
-const AdminDashboard = () => {
+const CommiteDashbord = () => {
+  const {user} = useSelector(state=>state.profile)
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const [countData, setCountData] = useState(null);
@@ -17,7 +19,7 @@ const AdminDashboard = () => {
   const ref = useRef(null);
 
   const getData = ()=>{
-    adminDashboard(setUserData,setCountData,setLoading);
+    committeeDashboard(setUserData,setCountData,setLoading);
   }
 
   // Getting details as soon as page is loaded
@@ -38,7 +40,7 @@ const AdminDashboard = () => {
               {
                 (countData == null) ? (<>
                   <div className="tiles-container">
-                    <MeteorDemo name={"Admin"} />
+                    <MeteorDemo name={"committee"} />
                     <GridPatternDemo title={"Total Application"} count={'-'} />
                     <GridPatternDemo title={"Approved Application"} count={'-'} />
                     <GridPatternDemo title={"Rejected Application"} count={"-"} />
@@ -46,22 +48,21 @@ const AdminDashboard = () => {
                   </div>
                 </>) : (<>
                   <div className="tiles-container">
-                    <MeteorDemo name={"Admin"} />
+                    <MeteorDemo name={user.sid} />
                     <GridPatternDemo title={"Total Application"} count={countData.totalCount} />
                     <GridPatternDemo title={"Approved Application"} count={countData.approved} />
                     <GridPatternDemo title={"Rejected Application"} count={countData.rejected} />
-                    <GridPatternDemo title={"Closed Application"} count={countData.closed} />
+                    <GridPatternDemo title={"Returned Application"} count={countData.returned} />
                   </div>
                 </>)
               }
-            
           </div>
 
           {(userData == null || userData.length==0) ? (
               <h1>Data Not Found</h1>
           ) : (
             <div className="dataTable-container">
-              <DataTable userData={userData} id={"admin"} setOpen={setOpen} />
+              <DataTable userData={userData} id={"committee"} setOpen={setOpen} />
             </div>
           )}
         </>
@@ -70,12 +71,11 @@ const AdminDashboard = () => {
       {/* Using ref for the PopUp component to detect click outside */}
       {open && (
         <div ref={ref}>
-          <ClosePopup setOpen={setOpen} getData={getData} />
+          <PopUp setOpen={setOpen} getData={getData} />
         </div>
       )}
     </div>
   );
 };
 
-export default AdminDashboard
-
+export default CommiteDashbord;

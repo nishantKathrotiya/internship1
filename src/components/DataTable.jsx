@@ -5,6 +5,7 @@ import Dataview from "./Dataview";
 import HodDataView from "./HodDataView";
 import Filter from './Filter';
 import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
+import CommitteeDataView from '../components/CommitteeDataView'
 
 const DataTable = ({ userData, id, setOpen }) => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -163,6 +164,13 @@ const DataTable = ({ userData, id, setOpen }) => {
         },
     ];
 
+    const dataViews = {
+        "student":(data,index)=><Dataview data={data} index={index} />,
+        "hod":(data,index)=><HodDataView data={data} index={index} setOpen={setOpen} />,
+        "admin":(data,index)=><AdminDataView data={data} index={index} setOpen={setOpen} />,
+        "committee":(data,index)=><CommitteeDataView data={data} index={index} setOpen={setOpen} />,
+    }
+
     return (
         <div className="DataTable-parant-Container">
             <div className="header-row">
@@ -191,14 +199,7 @@ const DataTable = ({ userData, id, setOpen }) => {
 
                 {filteredData.map((data, index) => (
                     <div className="row-content" key={data._id}>
-
-                        {
-                            id == 'student' ? (<Dataview data={data} index={index} />) : (
-                                
-                                    id == "admin" ? ( <AdminDataView data={data} index={index} setOpen={setOpen} />) : (<HodDataView data={data} index={index} setOpen={setOpen} />)
-                                
-                            )
-                        }
+                            {dataViews[id](data, index)}
                     </div>
                 ))}
             </div>

@@ -64,7 +64,6 @@ exports.isAdmin = async (req, res, next) => {
         message: "You are not admin",
       });
     }
-    console.log("Passed Is admin")
     next();
   } catch (error) {
     return res.json({
@@ -82,7 +81,6 @@ exports.isHod = async (req,res,next) => {
         message: "You are not admin",
       });
     }
-    console.log("Passed Is admin")
     next();
   } catch (error) {
     return res.json({
@@ -100,7 +98,6 @@ exports.isCommittee = async (req,res,next) => {
         message: "You are not admin",
       });
     }
-    console.log("Passed Is admin")
     next();
   } catch (error) {
     return res.json({

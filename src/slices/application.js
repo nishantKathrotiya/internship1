@@ -13,7 +13,7 @@ const applicationSlice = createSlice({
     // using reducers we can set the value of initial State;
     setApplicationID(state, value) {
       state.applicationID = value.payload;
-      console.log(state.applicationID);
+
     },
     setAction(state, value) {
       state.action = value.payload;
@@ -23,7 +23,6 @@ const applicationSlice = createSlice({
       state.msg = null;
       state.applicationID = null;
       state.action=null;
-      console.log(state.applicationID)
     },
   },
 });

@@ -5,15 +5,13 @@ const CommitteeSchema = new mongoose.Schema({
   status: {
     type: String,
     default: '',
-    enum: ["pending", "inprogress", "approved", "rejected", "returned"]
+    enum: ["pending", "inprogress", "approved", "rejected", "returned","closed"]
   },
   msg: {
     type: String,
     default: ''
   }
 }, { _id: false });
-
-
 
 const applicationSchema = new mongoose.Schema({
   fname: {
@@ -158,7 +156,7 @@ const applicationSchema = new mongoose.Schema({
     status: {
       type: String,
       required: true,
-      enum: ["pending", "inprogress", "approved", "rejected", "returned"],
+      enum: ["pending", "inprogress", "approved", "rejected", "returned" , "closed"],
     },
     msg: {
       type: String,

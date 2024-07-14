@@ -3,7 +3,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import useOnClickOutside from "../customHooks/useOnClickOutside";
 import { setNull, setAction} from "../slices/application";
 import { useDispatch , useSelector } from "react-redux";
-import { updateStatus } from "../services/operation/admin";
+import { updateStatus } from "../services/operation/committee";
 import { hodStatusUpdate } from "../services/operation/hod";
 
 const PopUp = ({ setOpen , getData}) => {
