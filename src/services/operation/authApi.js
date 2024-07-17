@@ -12,7 +12,7 @@ export function sendOtp(sid, navigate) {
     try {
       const response = await apiConnector(
         "POST",
-        "http://localhost:4000/auth/sendotp",
+        auth.SENDOTP_API,
         { sid, checkUserPresent: true }
       );
       if (!response.data.success) {
@@ -44,7 +44,7 @@ export function signUp(
     try {
       const response = await apiConnector(
         "POST",
-        "http://localhost:4000/auth/signup",
+        auth.SIGNUP_API,
         { firstName, lastName, sid, password, confirmPassword, otp }
       );
 
@@ -77,6 +77,7 @@ export function login(sid, password, navigate) {
         throw new Error(response.data.message);
       }
       toast.success("Login Successful");
+      // Cookies.set('token', response.data.token, { expires: 7 }); 
       dispatch(setToken(response.data.token));
       dispatch(setUser({ ...response.data.user }));
       

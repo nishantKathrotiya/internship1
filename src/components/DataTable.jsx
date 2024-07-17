@@ -193,7 +193,8 @@ const DataTable = ({ userData, id, setOpen }) => {
                         Paper Title <Filter id={"title"} filterData={filterData} />
                     </div>
                     <div className="colHeader">Date <Filter id={"date"} filterData={filterData} /> </div>
-                    <div className="colHeader">Status <Filter id={"status"} filterData={filterData} /> </div>
+                    <div className="colHeader">Overall Status <Filter id={"status"} filterData={filterData} /> </div>
+                    {id !=="student"&& <div className="colHeader">Your Status <Filter id={"status"} filterData={filterData} /> </div>}
                     <div className="colHeader">Action</div>
                 </div>
 

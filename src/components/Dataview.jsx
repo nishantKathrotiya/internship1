@@ -3,6 +3,7 @@ import { CiEdit } from "react-icons/ci";
 import { AiOutlineDownload } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
 import { viewApplication , downloadFile } from "../services/operation/common";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { deleteApplication } from '../services/operation/student';
 import Menu from './Menu';
 import { downloadData } from '../lib/data';
@@ -32,7 +33,7 @@ const Dataview = ({ data, index }) => {
             <div className="colHeader">{data.paperTitle}</div>
             <div className="colHeader">{data.createdAt.split('T')[0]}</div>
             <div className="colHeader"><span className={data.status.status}>{data.status.status}</span></div>
-            <div className="colHeader"><Menu applicationID={data._id} data={elemnts.editData} icon={elemnts.editIcon} /> | <Menu applicationID={data._id} data={downloadData.downloadData} icon={downloadData.downloadIcon} /> | <MdDeleteOutline className="icon iconMedium" onClick={()=>deleteApplication(data._id , )}/></div>
+            <div className="colHeader"><Menu applicationID={data._id} data={elemnts.editData} icon={elemnts.editIcon} /> | <Menu applicationID={data._id} data={downloadData.downloadData} icon={downloadData.downloadIcon} /> | <MdOutlineDeleteOutline className="icon iconMedium" onClick={()=>deleteApplication(data._id , )}/></div>
         </>
     )
 }

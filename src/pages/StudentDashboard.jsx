@@ -48,10 +48,11 @@ const StudentDashboard = () => {
                   </div>
                 </>)
               }
-              <div className="newApplication-conatainer">
+              
+            </div>
+            <div className="newApplication-conatainer">
                 <Link to="/student/application" className="newApplicationBTN">New Application</Link>
               </div>
-            </div>
 
             {
               userData == null ? (<h1>Data Not Found</h1>) : (

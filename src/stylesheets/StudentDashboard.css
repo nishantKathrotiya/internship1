@@ -44,23 +44,6 @@ body {
   max-height: fit-content;
 }
 
-.search-wrapper {
-  width: fit-content;
-  display: flex;
-  flex-direction: row;
-  gap: 1vw;
-  align-items: center;
-}
-
-#searchInput {
-  padding: 12px !important;
-  margin: 0;
-  margin-right: 2vw;
-  font-size: small;
-  border-radius: 10px;
-  width: 60% !important;
-}
-
 .responsiveGrid {
   font-size: 1vw;
 }
@@ -70,26 +53,44 @@ body {
 }
 
 .newApplication-conatainer {
-  padding: 20px 20px 20px 40px;
+  padding: 0 0 0 40px;
+  width: 100%;
   background: transparent;
+
 }
 
 .newApplicationBTN {
-  width: fit-content;
-  padding: 10px;
+  display: inline-block;
+  padding: 10px 20px; /* Adjust padding for better touch interaction */
   color: #316287;
-  border: 1px solid #2090d5 !important;
+  border: 1px solid #2090d5;
   background-color: #b3e5fc;
-  font-family: "poppins";
+  font-family: "Poppins", sans-serif; /* Use a fallback font */
   font-weight: 600;
   letter-spacing: 0.5px;
-  border: none;
-  width: 158px;
-  height: 50px;
   border-radius: 8px;
   margin-bottom: 10px;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none; 
+  max-width: 100%; 
+  box-sizing: border-box;
 }
+
+/* Optional: Adjust size for smaller screens */
+@media (max-width: 480px) {
+  .newApplication-conatainer {
+    padding: 10px 0 0 20px;
+    width: 100%;
+    background: transparent;
+  
+  }
+  .newApplicationBTN {
+    font-size: 14px; /* Decrease font size for smaller screens */
+    padding: 8px 16px; /* Adjust padding for smaller screens */
+  }
+}
+
 
 .dataTable-container {
   width: 97%;
@@ -112,6 +113,24 @@ body {
 }
 
 
+.search-wrapper {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  gap: 1vw;
+}
+
+#searchInput {
+  padding: 12px !important;
+  margin: 0;
+  margin-right: 2vw;
+  font-size: small;
+  border-radius: 10px;
+  width: 60% !important;
+}
+
 .DataNumber {
   width: 100%;
   display: flex;
@@ -133,8 +152,8 @@ body {
   /* position: sticky ; */
   /* top: 0; */
   padding: 1.2vw;
-  display: flex;
   min-width: 100%;
+  display: flex;
   width: fit-content;
   align-items: center;
   justify-content: space-between;
@@ -145,9 +164,11 @@ body {
 .colHeader {
   display: flex;
   align-items: center;
+  font-size: small;
   gap: 10px;
-  width: 13%;
-  min-width: 200px;
+  width: 10%;
+  min-width: 140px;
+  margin: 0 15px;
 }
 
 .icon {
@@ -422,18 +443,19 @@ body {
 
 
 .iconMedium{
-  height: 25px;
-  width: 25px;
+  height: 25px !important;
+  width: 25px !important;
 }
 
 @media (max-width:760px) {
-
+.margin{
+  margin-top:45px ;
+}
   .outerContainer-cards{
     display: none;
   }
   .dataTable-container{
-    height: 85cls
-    vh;
+    height: 85vh;
     overflow: hidden;
     padding-bottom: 5px;
     margin: 0;

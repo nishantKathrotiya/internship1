@@ -8,8 +8,8 @@ const Home = () => {
         <div className="text-box">
           <h1>Charusat University</h1>
           <p>
-            Making Website is now one of the easiest thing in the world. <br />
-            You just need to learn HTML, CSS, Javascript and you are good to go.
+            To serve society by striving to transform it through creation,<br/>
+            augmentation, dissemination and pepetuation of knowledge
           </p>
           <a href="https://www.charusat.ac.in/" target="blank" className="hero-btn">
             Visit Us to Know More
