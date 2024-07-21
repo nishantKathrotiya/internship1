@@ -61,6 +61,7 @@ const Login = () => {
                   onChange={handleOnChange}
                 />
               </div>
+             <Link to="/reset-password"> <p className="mb-[30px] text-sm">Forgot Password?</p></Link>
             </div>
 
             <div className="login-submit">

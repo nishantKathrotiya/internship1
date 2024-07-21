@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const userLoginSchema = mongoose.Schema({
     firstName:{
         type: String,
@@ -47,6 +48,12 @@ const userLoginSchema = mongoose.Schema({
         },
         enum: ["DIT", "DCE", "DCS","CIT", "CCE", "CCS" , "ADM"],
       },
+      ResetPasswordToken:{
+        type: String,
+      },
+      ResetPasswordTokenExperies:{
+        type: Date,
+      }
 });
 
 module.exports = mongoose.model('User', userLoginSchema);

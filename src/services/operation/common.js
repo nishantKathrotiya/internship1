@@ -61,3 +61,20 @@ export async function viewApplication(applicationID) {
       toast.error("Error downloading the file");
     }
 }
+
+
+export async function getStats(setStats) {
+  try {
+    const response = await apiConnector('GET', `http://localhost:4000/public/stats`);
+
+    if (!response.data.success) {
+      throw new Error("Network response was not ok");
+    }
+
+    setStats(response.data.data);
+
+  } catch (error) {
+    console.error("Error downloading the file:", error);
+    toast.error("Error downloading the file");
+  }
+}

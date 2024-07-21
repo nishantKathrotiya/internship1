@@ -1,4 +1,4 @@
-const express = require("express");
+  const express = require("express");
 const app = express();
 
 const path = require("path");
@@ -13,6 +13,7 @@ const studentRoutes = require("./routes/Student");
 const hodRoutes = require("./routes/Hod")
 const committeeRoutes = require("./routes/Committee");
 const adminRoutes = require("./routes/Admin")
+const publicRoutes = require("./routes/Public")
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -31,11 +32,12 @@ app.use(
 );
 
 //routes
-app.use("/auth", userRoutes);
-app.use("/student", studentRoutes);
 app.use("/hod", hodRoutes);
-app.use("/committee", committeeRoutes);
+app.use("/auth", userRoutes);
 app.use("/admin", adminRoutes);
+app.use("/public", publicRoutes);
+app.use("/student", studentRoutes);
+app.use("/committee", committeeRoutes);
 
 app.get("/", (req, res) => {
   return res.json({

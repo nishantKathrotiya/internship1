@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
 const otpModel = require("../model/otp");
 const otpGenerator = require("otp-generator");
@@ -43,26 +44,50 @@ const signUp = async (req, res) => {
       });
     }
   
-    const findOtp = await otpModel
-    .find( {sid:sid.toLowerCase()} )
-    .sort({ createdAt: -1 })
-    .limit(1);
+    // const findOtp = await otpModel
+    // .find( {sid:sid.toLowerCase()} )
+    // .sort({ createdAt: -1 })
+    // .limit(1);
   
   
   
-    if (findOtp[0].otp !== otp) {
+    // if (findOtp[0].otp !== otp) {
 
+    //   return res.json({
+    //     success: false,
+    //     msg: "OTP Does not match",
+    //   });
+    // }
+
+    const otpEntries = await otpModel.find({ sid: sid.toLowerCase() }).sort({ createdAt: -1 });
+
+    // Check if there are any OTP entries
+    if (otpEntries.length === 0) {
+      return res.json({
+        success: false,
+        msg: "No OTP Found",
+      });
+    }
+
+    // Verify the most recent OTP
+    const latestOtpEntry = otpEntries[0]; // Assuming the most recent OTP is at index 0
+
+    if (latestOtpEntry.otp !== otp) {
       return res.json({
         success: false,
         msg: "OTP Does not match",
       });
     }
+
+
+
     const hasedPassword = await bcrypt.hash(password, 10);
   
     const registredUser = await userModel.create({
       firstName,
       lastName,
       sid,
+      email:req.body.sid.toLowerCase()+'@charusat.edu.in',
       password: hasedPassword,
       role: accountType || "student",
     });
@@ -187,39 +212,6 @@ const sendOTP = async (req, res) => {
   }
 };
 
-const updateUser = async (req,res) => {
-  try {
-    const { firstName, lastName } = req.body.userDetails;
-
-    if (!firstName || !lastName) {
-    
-      return res.json({
-        success: false,
-        message: "Please Fill up All the Required Fields",
-      });
-    }
-
-    const user = await userModel.findByIdAndUpdate(req.user._id,{
-      $set:{
-        firstName:firstName,
-        lastName:lastName
-      }
-    },{new:true} ); 
-
-      user.password = undefined;
-
-      return res.status(200).json({
-        success: true,
-        user,
-      });
-    
-  } catch (err) {
-    res.json({
-      success: false,
-      msg: "Something Went Wrong",
-    });
-  }
-};
 
 const createAdmin = async (req, res) => {
   try{
@@ -280,4 +272,107 @@ const createAdmin = async (req, res) => {
   }
 };
 
-module.exports = { signUp, login, sendOTP,updateUser  ,createAdmin };
+const resetPassword = async (req, res) => {
+  
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.json({
+        success: false,
+        message: "Email Missing",
+      });
+    }
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "User Not Exist",
+      });
+    }
+
+    // Generate reset token and save it to user's document
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    const now = new Date();
+    user.ResetPasswordToken = resetToken;
+    user.ResetPasswordTokenExperies = now.setHours(now.getHours() + 1); // Token expires in 1 hour
+
+    await user.save();
+    console.log(user);
+
+    const mailBody = `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n`
+        + `Please click on the following link, or paste this into your browser to complete the process:\n\n`
+        + `${process.env.FRONTEND_URL}/update-password/${resetToken}\n\n`
+        + `If you did not request this, please ignore this email and your password will remain unchanged.\n`;
+
+    let res2 = await mailSender(
+      email,
+      "Reset Password Link for Charusat Helpdesk",
+      mailBody
+    );
+
+    return res.json({
+      success: true,
+      message: "Email Sent",
+    });
+
+  } catch (err) {
+    console.error(err.message);
+    return res.json({
+      success: false,
+      message: "Some Thing Went Wrong",
+    });
+  }
+}
+
+const changePassword = async (req, res) => {
+  
+  try {
+    const { token , password , confirmPassword } = req.body;
+
+    if (!token || !password || !confirmPassword) {
+      return res.json({
+        success: false,
+        message: "Email Missing",
+      });
+    }
+
+    const user = await userModel.findOne({
+      ResetPasswordToken: token,
+      ResetPasswordTokenExperies: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Invlid Token",
+      });
+    }
+
+    //encrypt the password
+    const hasedPassword = await bcrypt.hash(password, 10);
+
+    // Update user's password and clear reset token fields
+    user.password = hasedPassword;
+    user.resetPasswordToken = null;
+    user.resetPasswordExpires = null;
+
+    await user.save();
+
+    return res.json({
+      success: true,
+      message: "Password Updated",
+    });
+
+  } catch (err) {
+    console.error(err.message);
+    return res.json({
+      success: false,
+      message: "Some Thing Went Wrong",
+    });
+  }
+}
+
+
+module.exports = { signUp, login, sendOTP ,createAdmin,resetPassword,resetPassword,changePassword };

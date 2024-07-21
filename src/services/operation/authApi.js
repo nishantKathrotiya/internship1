@@ -3,7 +3,7 @@ import { setLoading } from "../../slices/auth";
 import { apiConnector } from "../connector";
 import { setToken, setUser } from "../../slices/profile";
 import Cookies from 'js-cookie';
-import {auth} from '../api'
+import {auth} from '../api';
 
 export function sendOtp(sid, navigate) {
   return async (dispatch) => {
@@ -91,6 +91,54 @@ export function login(sid, password, navigate) {
     dispatch(setLoading(false));
     toast.dismiss(toastId);
   };
+}
+
+export async function sendResetLink(email,setLoading,navigate) {
+  
+    const toastId = toast.loading("Loading...");
+    setLoading(true);
+    try {
+      const response = await apiConnector(
+        "POST",
+        auth.SENDRESETLINK_API,
+        { email}
+      );
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+      toast.success("Email Sent");
+      navigate("/login");
+    } catch (error) {
+      console.log("SENDOTP API ERROR............", error);
+      toast.error(error.message);
+    }
+   setLoading(false);
+    toast.dismiss(toastId);
+  
+}
+
+export async function updatePassword(token,password,confirmPassword,setLoading,navigate) {
+  
+  const toastId = toast.loading("Loading...");
+  setLoading(true);
+  try {
+    const response = await apiConnector(
+      "POST",
+      auth.UPDATEPASSWORD_API,
+      { token,password,confirmPassword}
+    );
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    toast.success("Password Updated");
+    navigate("/login")
+  } catch (error) {
+    console.log("SENDOTP API ERROR............", error);
+    toast.error("Could Not Update");
+  }
+  setLoading(false);
+  toast.dismiss(toastId);
+
 }
 
 export function logout(navigate) {

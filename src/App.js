@@ -13,6 +13,8 @@ import Committee from "./components/Committee.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import SendOtp from "./pages/SendOtp.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
+import UpdatePassword from "./pages/UpdatePassword.jsx";
 
 import Form from "./pages/Form.jsx";
 import EditApplication from "./pages/EditApplication.jsx";
@@ -42,7 +44,8 @@ function App() {
         <Route path="/login" element={<OpenRoute> <Login /> </OpenRoute>} />
         <Route path="/signup" element={<OpenRoute> <Signup /> </OpenRoute>} />
         <Route path="/verify-email" element={<OpenRoute> <SendOtp /> </OpenRoute>} />
-        <Route path="/download" element={<OpenRoute> <Download /> </OpenRoute>} />
+        <Route path="/reset-password" element={<OpenRoute> <ResetPassword /> </OpenRoute>} />
+        <Route path="/update-password/:token" element={<OpenRoute> <UpdatePassword /> </OpenRoute>} />
 
         <Route path={"/committee"} element={<Committee><Admin /></Committee>} >
           <Route path={"/committee"} element={<CommiteDashbord />} />

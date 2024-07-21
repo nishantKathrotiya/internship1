@@ -149,6 +149,11 @@
     color: #0C1421;
     font-weight: 600;
 }
+.adjustBTn{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
 @media (max-width:768px) {
     .sendtop-image {

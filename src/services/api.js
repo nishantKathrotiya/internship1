@@ -5,6 +5,8 @@ export const auth = {
   SENDOTP_API: BASE_URL + "/auth/sendotp",
   SIGNUP_API: BASE_URL + "/auth/signup",
   LOGIN_API: BASE_URL + "/auth/login",
+  SENDRESETLINK_API : BASE_URL + "/auth/reset-password",
+  UPDATEPASSWORD_API : BASE_URL + "/auth/change-password"
 };
 
 export const student = {

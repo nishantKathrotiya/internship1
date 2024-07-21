@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import OtpInput from 'react-otp-input';
-import { signUp } from '../services/operation/authApi';
+import { signUp,sendOtp } from '../services/operation/authApi';
+import { IoMdRefresh } from "react-icons/io";
+import { FaArrowLeft } from "react-icons/fa";
 
 
 import '../stylesheets/SendOtp.css'
@@ -68,10 +70,12 @@ const SendOtp = () => {
                                                 <button onClick={signupHandler}>Verify</button>
                                             </div>
                                             <div className='verifyEmailLastLink_22'>
-                                                <Link to="/signup" className='verifyEmailLastLinkStyle_22'>
+                                                <Link to="/signup" className='verifyEmailLastLinkStyle_22 adjustBTn'>
+                                                    <FaArrowLeft />
                                                     Back To Signup
                                                 </Link>
-                                                <button >
+                                                <button className='adjustBTn' onClick={()=>dispatch(sendOtp(signupData.sid, navigate))} >
+                                                    <IoMdRefresh />
                                                     Resend It
                                                 </button>
                                             </div>

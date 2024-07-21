@@ -143,4 +143,63 @@ const viewApplication = async (req, res) => {
     }
   };
 
-module.exports = { downloadFile , viewApplication }
+
+const getDashboardStats = async (req, res) => {
+  try {
+    const stats = await applicationModal.aggregate([
+      {
+        $facet: {
+          totalApplications: [{ $count: "count" }],
+          totalApprovedApplications: [
+            { $match: { "status.status": "approved" } },
+            { $count: "count" }
+          ],
+          totalPendingApplications: [
+            { $match: { "status.status": { $in: ["pending", "inprogress"] } } }, // Match pending or inprogress status
+            { $count: "count" }
+          ],
+          totalAmountGiven: [
+            { $match: { "status.status": "closed" } }, // Match only closed status
+            { $group: { _id: null, totalAmount: { $sum: "$regFees" } } }
+          ],
+          amountGivenForWebScience: [
+            { $match: { "status.status": "closed", "indexing": "Web Science" } }, // Match only closed status and Web Science
+            { $group: { _id: null, totalAmount: { $sum: "$regFees" } } }
+          ],
+          amountGivenForScopus: [
+            { $match: { "status.status": "closed", "indexing": "Scopus" } }, // Match only closed status and Scopus
+            { $group: { _id: null, totalAmount: { $sum: "$regFees" } } }
+          ]
+        }
+      },
+      {
+        $project: {
+          totalApplications: { $ifNull: [{ $arrayElemAt: ["$totalApplications.count", 0] }, 0] },
+          totalApprovedApplications: { $ifNull: [{ $arrayElemAt: ["$totalApprovedApplications.count", 0] }, 0] },
+          totalPendingApplications: { $ifNull: [{ $arrayElemAt: ["$totalPendingApplications.count", 0] }, 0] },
+          totalAmountGiven: { $ifNull: [{ $arrayElemAt: ["$totalAmountGiven.totalAmount", 0] }, 0] },
+          amountGivenForWebScience: { $ifNull: [{ $arrayElemAt: ["$amountGivenForWebScience.totalAmount", 0] }, 0] },
+          amountGivenForScopus: { $ifNull: [{ $arrayElemAt: ["$amountGivenForScopus.totalAmount", 0] }, 0] }
+        }
+      }
+    ]);
+
+    console.log(stats[0]);
+
+    return res.json({
+      success: true,
+      message: "Looged Your data",
+      data:stats[0],
+    });
+
+  } catch (error) {
+    console.log(error);
+      res.json({
+        success: false,
+        message: "SomeThing Went Wrong",
+      });
+  }
+};
+
+
+module.exports = { downloadFile , viewApplication,getDashboardStats }
