@@ -22,7 +22,7 @@ export function sendOtp(sid, navigate) {
       navigate("/verify-email");
     } catch (error) {
       console.log("SENDOTP API ERROR............", error);
-      toast.error("Could Not Send OTP");
+      toast.error(error.message);
     }
     dispatch(setLoading(false));
     toast.dismiss(toastId);
@@ -134,7 +134,7 @@ export async function updatePassword(token,password,confirmPassword,setLoading,n
     navigate("/login")
   } catch (error) {
     console.log("SENDOTP API ERROR............", error);
-    toast.error("Could Not Update");
+    toast.error(error.message);
   }
   setLoading(false);
   toast.dismiss(toastId);

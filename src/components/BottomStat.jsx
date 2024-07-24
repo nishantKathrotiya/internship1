@@ -9,7 +9,7 @@ const BottomStat = ({ title, count }) => {
     });
 
     return (
-        <div className="bottomContainerContent1" ref={ref}>
+        <div className="minflex" ref={ref}>
             <h1 className="uniqueText bottomTitle">{title}</h1>
             <h1 className="uniqueText bottomTitle">
                 {inView && count !== 0 ? (

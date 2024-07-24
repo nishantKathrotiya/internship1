@@ -75,6 +75,5 @@ export async function getStats(setStats) {
 
   } catch (error) {
     console.error("Error downloading the file:", error);
-    toast.error("Error downloading the file");
   }
 }

@@ -31,33 +31,24 @@ const signUp = async (req, res) => {
     ) {
       return res.json({
         success: false,
-        msg: "Fill All the Fields",
+        message: "Fill All the Fields",
       });
     }
     sid = sid.toLowerCase();
-    const userPresent = await userModel.findOne({ sid: sid });
+    const userPresent = await userModel.findOne({
+      $or: [
+        { sid: sid },
+        { email: req.body.sid.toLowerCase() + '@charusat.edu.in' }
+      ]
+    });
+    
   
     if (userPresent) {
       return res.json({
         success: false,
-        msg: "User Alredy Exist",
+        message: "User Alredy Exist",
       });
     }
-  
-    // const findOtp = await otpModel
-    // .find( {sid:sid.toLowerCase()} )
-    // .sort({ createdAt: -1 })
-    // .limit(1);
-  
-  
-  
-    // if (findOtp[0].otp !== otp) {
-
-    //   return res.json({
-    //     success: false,
-    //     msg: "OTP Does not match",
-    //   });
-    // }
 
     const otpEntries = await otpModel.find({ sid: sid.toLowerCase() }).sort({ createdAt: -1 });
 
@@ -65,17 +56,15 @@ const signUp = async (req, res) => {
     if (otpEntries.length === 0) {
       return res.json({
         success: false,
-        msg: "No OTP Found",
+        message: "No OTP Found",
       });
     }
-
-    // Verify the most recent OTP
-    const latestOtpEntry = otpEntries[0]; // Assuming the most recent OTP is at index 0
-
+    
+    const latestOtpEntry = otpEntries[0]; 
     if (latestOtpEntry.otp !== otp) {
       return res.json({
         success: false,
-        msg: "OTP Does not match",
+        message: "OTP Does not match",
       });
     }
 
@@ -94,7 +83,7 @@ const signUp = async (req, res) => {
   
     return res.json({
       success: true,
-      msg: "User Registred",
+      message: "User Registred",
     });
 
   }catch(error){
@@ -173,6 +162,30 @@ const login = async (req, res) => {
 //sendOTP
 const sendOTP = async (req, res) => {
   try {
+    let {sid} = req.body;
+    sid = sid.toLowerCase();
+    
+    if(!sid){
+      res.json({
+        success: false,
+        message: "Id Not Found",
+      });
+    }
+
+    const userPresent = await userModel.findOne({
+      $or: [
+        { sid: sid },
+        { email:sid.toLowerCase() + '@charusat.edu.in' }
+      ]
+    });
+
+    if (userPresent) {
+      return res.json({
+        success: false,
+        message: "User Alredy Exist",
+      });
+    }
+
     let genratedOtp = otpGenerator.generate(6, {
       upperCaseAlphabets: false,
       specialChars: false,
@@ -202,16 +215,16 @@ const sendOTP = async (req, res) => {
 
     res.json({
       success: true,
-      msg: "OTP Sent Successfully",
+      message: "OTP Sent Successfully",
     });
-  } catch {
+  } catch(error) {
+    console.log(error)
     res.json({
       success: false,
-      msg: "Something Went Wrong",
+      message: "Something Went Wrong",
     });
   }
 };
-
 
 const createAdmin = async (req, res) => {
   try{
@@ -233,7 +246,7 @@ const createAdmin = async (req, res) => {
     ) {
       return res.json({
         success: false,
-        msg: "Fill All the Fields",
+        message: "Fill All the Fields",
       });
     }
     sid = sid.toLowerCase();
@@ -242,7 +255,7 @@ const createAdmin = async (req, res) => {
     if (userPresent) {
       return res.json({
         success: false,
-        msg: "User Alredy Exist",
+        message: "User Alredy Exist",
       });
     }
 
@@ -258,7 +271,7 @@ const createAdmin = async (req, res) => {
   
     return res.json({
       success: true,
-      msg: "User Registred",
+      message: "User Registred",
     });
 
   }catch(error){
@@ -355,8 +368,8 @@ const changePassword = async (req, res) => {
 
     // Update user's password and clear reset token fields
     user.password = hasedPassword;
-    user.resetPasswordToken = null;
-    user.resetPasswordExpires = null;
+    user.ResetPasswordToken = null;
+    user.ResetPasswordTokenExperies = null;
 
     await user.save();
 

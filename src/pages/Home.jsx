@@ -1,24 +1,24 @@
-import "../stylesheets/Home.css";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import CharusatLogo from '../assets/Charusat-Full.jpg'
 import StatCard from "../components/StatCard";
 import Carousel from "../components/Carousel";
 import BottomStat from "../components/BottomStat";
-import { useEffect, useState } from "react";
 import { getStats } from "../services/operation/common";
+import CharusatLogo from '../assets/Charusat-Full.jpg'
+import "../stylesheets/Home.css";
 const Home = () => {
-  const [stats,setStats] = useState({
-    totalApplications: "-",
-    totalPendingApplications:"-",
-    totalApprovedApplications: "-",
-    totalAmountGiven: "-",
-    amountGivenForWebScience: "-",
-    amountGivenForScopus: "-"
+  const [stats, setStats] = useState({
+    totalApplications: 0,
+    totalPendingApplications: 0,
+    totalApprovedApplications: 0,
+    totalAmountGiven: 0,
+    amountGivenForWebScience: 0,
+    amountGivenForScopus: 0
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     getStats(setStats);
-  },[])
+  }, [])
 
   return (
     <>
@@ -28,7 +28,7 @@ const Home = () => {
           <h1>Charusat University</h1>
           <p>
             To serve society by striving to transform it through creation,<br />
-            augmentation, dissemination and pepetuation of knowledge
+            augmentation, dissemination and perpetuation  of knowledge
           </p>
           <a href="https://www.charusat.ac.in/" target="blank" className="hero-btn">
             Visit Us to Know More
@@ -46,14 +46,14 @@ const Home = () => {
         <div className="bloom" />
         <div className="content">
           <div className="topContentContainer">
-            <StatCard title={"Total Applications"} count={stats.totalApplications}/>
+            <StatCard title={"Total Applications"} count={stats.totalAmountGiven} />
             <StatCard title={"Approved Applications"} count={stats.totalApprovedApplications} />
             <StatCard title={"Inprogress Applications"} count={stats.totalPendingApplications} />
           </div>
           <div className="bottomContentContainer">
-            <BottomStat title={"Total Grant Given"} count={stats.totalAmountGiven} />
-            <BottomStat title={"Scoups"} count={stats.amountGivenForScopus} />
-            <BottomStat title={"Web Of Science"} count={stats.amountGivenForWebScience} />
+            <div className="bottomContainerContent1"><BottomStat title={"Total Grant Given"} count={stats.totalAmountGiven} /></div>
+            <div className="bottomContainerContent1 hide"><BottomStat title={"Scoups"} count={stats.amountGivenForScopus} /></div>
+            <div className="bottomContainerContent1 hide"> <BottomStat className="hide" title={"Web Of Science"} count={stats.amountGivenForWebScience} /></div>
           </div>
         </div>
 
@@ -70,7 +70,7 @@ const Home = () => {
             </div>
             <div className="rightFooterContent">
               <span className="footerText">Under The Guidance Of<br></br></span>
-              <span className="footerText">Dr. Bankim Patel<br></br></span>
+              <span className="footerText">Dr. Bamkin Patel<br></br></span>
               <span className="footerText">Prof. Hitesh Makawana<br></br></span>
             </div>
           </div>
