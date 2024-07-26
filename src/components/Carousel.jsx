@@ -13,7 +13,7 @@ import rpcpBW from "../assets/bwlogos/rpcpbw.png";
 const Carousel = () => {
     return (
         <div className="carousel-container">
-            <h1 className="h1Title uniqueText logosText">Our Faculties</h1>
+            <h1 className="h1Title uniqueText logosText">Our Institute</h1>
             <div className="moving-div">
 
                 <div className="move">

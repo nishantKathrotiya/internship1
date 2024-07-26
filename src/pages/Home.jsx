@@ -25,7 +25,7 @@ const Home = () => {
       <Navbar />
       <section className="header">
         <div className="text-box">
-          <h1>Charusat University</h1>
+          <h1>Charotar University of Science and Technology</h1>
           <p>
             To serve society by striving to transform it through creation,<br />
             augmentation, dissemination and perpetuation  of knowledge
@@ -63,14 +63,14 @@ const Home = () => {
           </div>
           <div className="rightDivFooter">
             <div className="leftFooterContent">
-              <span className="footerText">Desgend and Devloped by<br></br></span>
+              <span className="footerText">Designed and Devloped by<br></br></span>
               <span className="footerText">Meet Gami (22DIT015)<br></br></span>
               <span className="footerText">Meet Jasani (22DIT017)<br></br></span>
               <span className="footerText">Nishant kathrotiya (22DIT022)<br></br></span>
             </div>
             <div className="rightFooterContent">
               <span className="footerText">Under The Guidance Of<br></br></span>
-              <span className="footerText">Dr. Bamkin Patel<br></br></span>
+              <span className="footerText">Dr. Bankin Patel<br></br></span>
               <span className="footerText">Prof. Hitesh Makawana<br></br></span>
             </div>
           </div>
