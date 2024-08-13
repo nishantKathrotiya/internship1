@@ -1,3 +1,5 @@
+Developed an online platform for research paper submission and approval at Devang Patel Institute of Advanced Technology and Research (DEPSTAR). The system streamlined the process by automating submissions, reviews, and fee disbursements, transitioning from manual methods to a user-friendly digital solution. Leveraged technologies including React.js, Node.js, Express.js, and MongoDB to enhance efficiency, transparency, and user satisfaction.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
